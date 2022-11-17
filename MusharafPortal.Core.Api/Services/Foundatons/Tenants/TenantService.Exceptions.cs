@@ -1,11 +1,14 @@
 ﻿using MusharafPortal.Core.Api.Models.Tenants;
 using MusharafPortal.Core.Api.Models.Tenants.Exceptions;
+using System.Data.SqlClient;
 
 namespace MusharafPortal.Core.Api.Services.Foundatons.Tenants
 {
     public partial class TenantService
     {
         private delegate ValueTask<Tenant> ReturningTenantFunction();
+
+        private delegate IQueryable<Tenant> ReturningTenantsFunction();
 
         private async ValueTask<Tenant> TryCatch(ReturningTenantFunction returningTenantFunction)
         {
@@ -27,12 +30,47 @@ namespace MusharafPortal.Core.Api.Services.Foundatons.Tenants
             }
         }
 
+        private IQueryable<Tenant> TryCatch(ReturningTenantsFunction returningTenantsFunction)
+        {
+            try
+            {
+                return returningTenantsFunction();
+            }
+            catch (SqlException sqlException)
+            {
+                throw CreateAndLogCriticalDependencyException(sqlException);
+            }
+            catch (Exception exception)
+            {
+                var failedTenantServiceException =
+                    new FailedTenantServiceException(exception);
+
+                throw CreateAndLogServiceException(failedTenantServiceException);
+            }
+        }
+
+        private TenantServiceException CreateAndLogServiceException(Exception exception)
+        {
+            var tenantServiceException = new TenantServiceException(exception);
+            this.loggingBroker.LogError(tenantServiceException);
+
+            return tenantServiceException;
+        }
+
         private TenantValidationException CreateAndLogValidationException(Exception exception)
         {
             var tenantValidationException = new TenantValidationException(exception);
             this.loggingBroker.LogError(tenantValidationException);
 
             return tenantValidationException;
+        }
+
+        private TenantDependencyException CreateAndLogCriticalDependencyException(Exception exception)
+        {
+            var tenantDependencyException = new TenantDependencyException(exception);
+            this.loggingBroker.LogCritical(tenantDependencyException);
+
+            return tenantDependencyException;
         }
     }
 }
