@@ -2,7 +2,7 @@
 using MusharafPortal.Core.Api.Models.Tenants;
 using MusharafPortal.Core.Api.Models.Tenants.Exceptions;
 
-namespace MusharafPortal.Core.Api.Tests.Unit.Services.Foundations
+namespace MusharafPortal.Core.Api.Tests.Unit.Services.Foundations.Tenants
 {
     public partial class TenantServiceTests
     {

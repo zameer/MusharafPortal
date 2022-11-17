@@ -1,7 +1,6 @@
 ﻿using MusharafPortal.Core.Api.Brokers.Loggings;
 using MusharafPortal.Core.Api.Brokers.Storages;
 using MusharafPortal.Core.Api.Models.Tenants;
-using MusharafPortal.Core.Api.Models.Tenants.Exceptions;
 
 namespace MusharafPortal.Core.Api.Services.Foundatons.Tenants
 {
@@ -18,25 +17,22 @@ namespace MusharafPortal.Core.Api.Services.Foundatons.Tenants
             this.loggingBroker = loggingBroker;
         }
 
-        public async ValueTask<Tenant> CreateTenantAsync(Tenant tenant)
+        public ValueTask<Tenant> CreateTenantAsync(Tenant tenant) =>
+        TryCatch(async () =>
         {
-            try
-            {
-                ValidateTenant(tenant);
-                return await storageBroker.InsertTenantAsync(tenant);
-            }
-            catch (NullTenantException nullTenantException)
-            {
-                throw CreateAndLogValidationException(exception: nullTenantException);
-            }
-        }
+            ValidateTenant(tenant);
 
-        private TenantValidationException CreateAndLogValidationException(Exception exception)
+            return await storageBroker.InsertTenantAsync(tenant);
+        });
+
+        public ValueTask<Tenant> RetreiveTenantByIdAsync(Guid Id) => 
+        TryCatch(async () =>
         {
-            var tenantValidationException = new TenantValidationException(exception);
-            this.loggingBroker.LogError(tenantValidationException);
-         
-            return tenantValidationException;
-        }
+            ValidateTenantId(Id);
+            Tenant maybeTenant = await storageBroker.SelectTenantByIdAsync(Id);
+            ValidateStorageTenant(maybeTenant, Id);
+
+            return maybeTenant;
+        });
     }
 }

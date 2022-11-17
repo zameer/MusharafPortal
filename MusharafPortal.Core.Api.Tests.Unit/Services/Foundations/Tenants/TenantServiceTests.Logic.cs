@@ -1,13 +1,8 @@
 ﻿using FluentAssertions;
 using Moq;
 using MusharafPortal.Core.Api.Models.Tenants;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace MusharafPortal.Core.Api.Tests.Unit.Services.Foundations
+namespace MusharafPortal.Core.Api.Tests.Unit.Services.Foundations.Tenants
 {
     public partial class TenantServiceTests
     {

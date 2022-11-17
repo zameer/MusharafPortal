@@ -16,5 +16,13 @@ namespace MusharafPortal.Core.Api.Brokers.Storages
 
             return entityEntryTenant.Entity;
         }
+
+        public async ValueTask<Tenant> SelectTenantByIdAsync(Guid tenantId)
+        {
+            using var broker = new StorageBroker(configuration);
+            broker.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+
+            return await broker.Tenants.FindAsync(tenantId);
+        }
     }
 }

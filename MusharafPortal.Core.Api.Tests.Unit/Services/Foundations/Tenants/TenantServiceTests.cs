@@ -5,7 +5,7 @@ using MusharafPortal.Core.Api.Models.Tenants;
 using MusharafPortal.Core.Api.Services.Foundatons.Tenants;
 using Tynamix.ObjectFiller;
 
-namespace MusharafPortal.Core.Api.Tests.Unit.Services.Foundations
+namespace MusharafPortal.Core.Api.Tests.Unit.Services.Foundations.Tenants
 {
     public partial class TenantServiceTests
     {
