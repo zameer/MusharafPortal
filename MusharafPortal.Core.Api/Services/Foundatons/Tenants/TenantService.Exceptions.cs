@@ -21,6 +21,10 @@ namespace MusharafPortal.Core.Api.Services.Foundatons.Tenants
             {
                 throw CreateAndLogValidationException(exception: notFoundTenantException);
             }
+            catch(InvalidTenantException invalidTenantException)
+            {
+                throw CreateAndLogValidationException(exception: invalidTenantException);
+            }
         }
 
         private TenantValidationException CreateAndLogValidationException(Exception exception)
