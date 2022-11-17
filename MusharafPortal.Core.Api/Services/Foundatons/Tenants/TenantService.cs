@@ -12,9 +12,7 @@ namespace MusharafPortal.Core.Api.Services.Foundatons.Tenants
             this.storageBroker = storageBroker;
         }
 
-        public ValueTask<Tenant> CreateTenantAsync(Tenant tenant)
-        {
-            throw new NotImplementedException();
-        }
+        public async ValueTask<Tenant> CreateTenantAsync(Tenant tenant) =>
+            await storageBroker.InsertTenantAsync(tenant);
     }
 }

@@ -18,10 +18,20 @@ namespace MusharafPortal.Core.Api.Tests.Unit.Services.Foundations
                 storageBroker: this.storageBrokerMock.Object);
         }
 
-        private static Tenant CreateRandomTenant() =>
-            CreateRandomTenantFiller().Create();
+        private static Tenant CreateRandomTenant(DateTimeOffset dateTime) =>
+            CreateRandomTenantFiller(dateTime).Create();
 
-        private static Filler<Tenant> CreateRandomTenantFiller() =>
-            new Filler<Tenant>();
+
+        private static DateTimeOffset GetRandomDateTime() =>
+            new DateTimeRange(earliestDate: new DateTime()).GetValue();
+
+        private static Filler<Tenant> CreateRandomTenantFiller(DateTimeOffset dateTime) {
+            var filler = new Filler<Tenant>();
+
+            filler.Setup()
+                .OnType<DateTimeOffset>().Use(dateTime);
+
+            return filler;
+        }
     }
 }

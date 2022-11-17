@@ -15,7 +15,9 @@ namespace MusharafPortal.Core.Api.Tests.Unit.Services.Foundations
         public async Task ShouldAddTenantAsync()
         {
             // given
-            Tenant randomTenant = CreateRandomTenant();
+            DateTimeOffset randomDateTime = GetRandomDateTime();
+            DateTimeOffset dateTime = randomDateTime;
+            Tenant randomTenant = CreateRandomTenant(dateTime);
             Tenant inputTenant = randomTenant;
             Tenant insertedTenant = inputTenant;
             Tenant expectedTenant = insertedTenant;
