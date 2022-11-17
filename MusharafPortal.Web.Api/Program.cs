@@ -1,8 +1,16 @@
+using MusharafPortal.Web.Api.Brokers.Storages;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+
+builder.Services.AddDbContext<StorageBroker>();
+
+//Add Brokers
+builder.Services.AddTransient<IStorageBroker, StorageBroker>();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
