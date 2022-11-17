@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33103.184
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusharafPortal.Web.Api", "MusharafPortal.Web.Api\MusharafPortal.Web.Api.csproj", "{18D17D75-CBDD-47E8-A01C-901D077601D0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MusharafPortal.Core.Api", "MusharafPortal.Core.Api\MusharafPortal.Core.Api.csproj", "{18D17D75-CBDD-47E8-A01C-901D077601D0}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MusharafPortalWebApi", "MusharafPortalWebApi", "{CFA3D715-C9D6-41BD-8162-71AEF2524622}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MusharafPortalApi", "MusharafPortalApi", "{CFA3D715-C9D6-41BD-8162-71AEF2524622}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MusharafPortalWebBlazor", "MusharafPortalWebBlazor", "{9E5BADDB-0F87-4C8E-B6E8-A3085BDAA600}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MusharafPortalBlazor", "MusharafPortalBlazor", "{9E5BADDB-0F87-4C8E-B6E8-A3085BDAA600}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

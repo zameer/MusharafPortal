@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace MusharafPortal.Web.Api.Brokers.Storages
+namespace MusharafPortal.Core.Api.Brokers.Storages
 {
     public partial class StorageBroker : DbContext, IStorageBroker
     {

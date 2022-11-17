@@ -1,4 +1,4 @@
-using MusharafPortal.Web.Api.Brokers.Storages;
+using MusharafPortal.Core.Api.Brokers.Storages;
 
 var builder = WebApplication.CreateBuilder(args);
 

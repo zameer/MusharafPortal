@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MusharafPortal.Web.Api.Models.Tenants;
+using MusharafPortal.Core.Api.Models.Tenants;
 
-namespace MusharafPortal.Web.Api.Brokers.Storages
+namespace MusharafPortal.Core.Api.Brokers.Storages
 {
     public partial class StorageBroker
     {

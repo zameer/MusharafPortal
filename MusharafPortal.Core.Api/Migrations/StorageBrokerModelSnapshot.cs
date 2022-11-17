@@ -2,21 +2,18 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using MusharafPortal.Web.Api.Brokers.Storages;
+using MusharafPortal.Core.Api.Brokers.Storages;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace MusharafPortal.Web.Api.Migrations
+namespace MusharafPortal.Core.Api.Migrations
 {
     [DbContext(typeof(StorageBroker))]
-    [Migration("20221117070355_InitializeDbAndCreateTenant")]
-    partial class InitializeDbAndCreateTenant
+    partial class StorageBrokerModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,7 +22,7 @@ namespace MusharafPortal.Web.Api.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("MusharafPortal.Web.Api.Models.Tenants.Tenant", b =>
+            modelBuilder.Entity("MusharafPortal.Core.Api.Models.Tenants.Tenant", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()

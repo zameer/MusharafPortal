@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace MusharafPortal.Web.Api.Migrations
+namespace MusharafPortal.Core.Api.Migrations
 {
     /// <inheritdoc />
     public partial class InitializeDbAndCreateTenant : Migration
