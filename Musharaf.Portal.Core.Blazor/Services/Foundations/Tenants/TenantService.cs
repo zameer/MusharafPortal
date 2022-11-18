@@ -4,7 +4,7 @@ using Musharaf.Portal.Core.Blazor.Models.Tenants;
 
 namespace Musharaf.Portal.Core.Blazor.Services.Foundations.Tenants
 {
-    public class TenantService : ITenantService
+    public partial class TenantService : ITenantService
     {
         private readonly IApiBroker apiBroker;
         private readonly ILoggingBroker loggingBroker;
@@ -17,9 +17,11 @@ namespace Musharaf.Portal.Core.Blazor.Services.Foundations.Tenants
             this.loggingBroker = loggingBroker;
         }
 
-        public async ValueTask<Tenant> CreateTenantAsync(Tenant tenant)
+        public ValueTask<Tenant> CreateTenantAsync(Tenant tenant) =>
+        TryCatch(async () =>
         {
+            ValidateTenant(tenant);
             return await this.apiBroker.PostTenantAsync(tenant);
-        }
+        });
     }
 }
