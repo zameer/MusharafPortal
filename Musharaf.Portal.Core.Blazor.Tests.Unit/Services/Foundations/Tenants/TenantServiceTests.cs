@@ -3,6 +3,7 @@ using Musharaf.Portal.Core.Blazor.Brokers.Apis;
 using Musharaf.Portal.Core.Blazor.Brokers.Loggings;
 using Musharaf.Portal.Core.Blazor.Models.Tenants;
 using Musharaf.Portal.Core.Blazor.Services.Foundations.Tenants;
+using System.Linq.Expressions;
 using Tynamix.ObjectFiller;
 
 namespace Musharaf.Portal.Core.Blazor.Tests.Unit.Services.Foundations.Tenants
@@ -25,6 +26,12 @@ namespace Musharaf.Portal.Core.Blazor.Tests.Unit.Services.Foundations.Tenants
 
         private static Tenant CreateRandomTenant() =>
             CreateTenantFiller().Create();
+
+        private Expression<Func<Exception, bool>> SameExceptionAs(Exception expectedException)
+        {
+            return actualException => actualException.Message == expectedException.Message 
+                && actualException.InnerException.Message == expectedException.InnerException.Message;
+        }
 
         private static Filler<Tenant> CreateTenantFiller()
         {
