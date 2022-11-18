@@ -10,16 +10,16 @@ namespace Musharaf.Portal.Core.Blazor.Services.Foundations.Tenants
         private readonly ILoggingBroker loggingBroker;
 
         public TenantService(
-            IApiBroker apiBroker, 
+            IApiBroker apiBroker,
             ILoggingBroker loggingBroker)
         {
             this.apiBroker = apiBroker;
             this.loggingBroker = loggingBroker;
         }
 
-        public ValueTask<Tenant> CreateTenantAsync(Tenant tenant)
+        public async ValueTask<Tenant> CreateTenantAsync(Tenant tenant)
         {
-            throw new NotImplementedException();
+            return await this.apiBroker.PostTenantAsync(tenant);
         }
     }
 }
