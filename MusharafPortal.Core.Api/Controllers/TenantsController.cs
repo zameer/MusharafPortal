@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Musharaf.Portal.Core.Api.Models.Tenants;
 using Musharaf.Portal.Core.Api.Models.Tenants.Exceptions;
-using Musharaf.Portal.Core.Api.Services.Foundatons.Tenants;
+using Musharaf.Portal.Core.Api.Services.Foundations.Tenants;
 using RESTFulSense.Controllers;
 
 namespace Musharaf.Portal.Core.Api.Controllers

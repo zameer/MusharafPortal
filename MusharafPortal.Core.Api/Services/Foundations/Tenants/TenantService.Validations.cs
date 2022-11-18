@@ -1,7 +1,7 @@
 ﻿using Musharaf.Portal.Core.Api.Models.Tenants;
 using Musharaf.Portal.Core.Api.Models.Tenants.Exceptions;
 
-namespace Musharaf.Portal.Core.Api.Services.Foundatons.Tenants
+namespace Musharaf.Portal.Core.Api.Services.Foundations.Tenants
 {
     public partial class TenantService
     {

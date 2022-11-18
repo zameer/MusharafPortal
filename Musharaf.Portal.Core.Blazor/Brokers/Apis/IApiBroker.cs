@@ -1,6 +1,6 @@
 ﻿namespace Musharaf.Portal.Core.Blazor.Brokers.Apis
 {
-    public interface IApiBroker
+    public partial interface IApiBroker
     {
     }
 }

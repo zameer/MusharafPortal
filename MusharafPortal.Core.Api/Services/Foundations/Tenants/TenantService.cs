@@ -2,7 +2,7 @@
 using Musharaf.Portal.Core.Api.Brokers.Storages;
 using Musharaf.Portal.Core.Api.Models.Tenants;
 
-namespace Musharaf.Portal.Core.Api.Services.Foundatons.Tenants
+namespace Musharaf.Portal.Core.Api.Services.Foundations.Tenants
 {
     public partial class TenantService : ITenantService
     {
