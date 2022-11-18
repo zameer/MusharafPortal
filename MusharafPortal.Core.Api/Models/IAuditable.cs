@@ -1,4 +1,4 @@
-﻿namespace MusharafPortal.Core.Api.Models
+﻿namespace Musharaf.Portal.Core.Api.Models
 {
     public interface IAuditable
     {

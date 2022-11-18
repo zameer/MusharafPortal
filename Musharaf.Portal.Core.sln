@@ -3,13 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33103.184
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MusharafPortal.Core.Api", "MusharafPortal.Core.Api\MusharafPortal.Core.Api.csproj", "{18D17D75-CBDD-47E8-A01C-901D077601D0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Musharaf.Portal.Core.Api", "MusharafPortal.Core.Api\Musharaf.Portal.Core.Api.csproj", "{18D17D75-CBDD-47E8-A01C-901D077601D0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MusharafPortalApi", "MusharafPortalApi", "{CFA3D715-C9D6-41BD-8162-71AEF2524622}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MusharafPortalBlazor", "MusharafPortalBlazor", "{9E5BADDB-0F87-4C8E-B6E8-A3085BDAA600}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusharafPortal.Core.Api.Tests.Unit", "MusharafPortal.Core.Api.Tests.Unit\MusharafPortal.Core.Api.Tests.Unit.csproj", "{0F7C4C64-4E4B-473A-8827-9D7C8AA2E790}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Musharaf.Portal.Core.Api.Tests.Unit", "MusharafPortal.Core.Api.Tests.Unit\Musharaf.Portal.Core.Api.Tests.Unit.csproj", "{0F7C4C64-4E4B-473A-8827-9D7C8AA2E790}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Musharaf.Portal.Core.Blazor", "Musharaf.Portal.Core.Blazor\Musharaf.Portal.Core.Blazor.csproj", "{7C02EFA5-C5E1-473E-B342-87CBB2173618}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Musharaf.Portal.Core.Blazor.Tests.Unit", "Musharaf.Portal.Core.Blazor.Tests.Unit\Musharaf.Portal.Core.Blazor.Tests.Unit.csproj", "{1397BBA0-E2BF-4641-AEF0-538C35A8E7C2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,6 +29,14 @@ Global
 		{0F7C4C64-4E4B-473A-8827-9D7C8AA2E790}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F7C4C64-4E4B-473A-8827-9D7C8AA2E790}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0F7C4C64-4E4B-473A-8827-9D7C8AA2E790}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C02EFA5-C5E1-473E-B342-87CBB2173618}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C02EFA5-C5E1-473E-B342-87CBB2173618}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C02EFA5-C5E1-473E-B342-87CBB2173618}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C02EFA5-C5E1-473E-B342-87CBB2173618}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1397BBA0-E2BF-4641-AEF0-538C35A8E7C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1397BBA0-E2BF-4641-AEF0-538C35A8E7C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1397BBA0-E2BF-4641-AEF0-538C35A8E7C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1397BBA0-E2BF-4641-AEF0-538C35A8E7C2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,6 +44,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{18D17D75-CBDD-47E8-A01C-901D077601D0} = {CFA3D715-C9D6-41BD-8162-71AEF2524622}
 		{0F7C4C64-4E4B-473A-8827-9D7C8AA2E790} = {CFA3D715-C9D6-41BD-8162-71AEF2524622}
+		{7C02EFA5-C5E1-473E-B342-87CBB2173618} = {9E5BADDB-0F87-4C8E-B6E8-A3085BDAA600}
+		{1397BBA0-E2BF-4641-AEF0-538C35A8E7C2} = {9E5BADDB-0F87-4C8E-B6E8-A3085BDAA600}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0B93964E-6F9F-47B2-958C-2CFA8305E037}

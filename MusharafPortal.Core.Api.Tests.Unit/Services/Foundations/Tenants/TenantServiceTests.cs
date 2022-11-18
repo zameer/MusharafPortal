@@ -1,11 +1,11 @@
 using Moq;
-using MusharafPortal.Core.Api.Brokers.Loggings;
-using MusharafPortal.Core.Api.Brokers.Storages;
-using MusharafPortal.Core.Api.Models.Tenants;
-using MusharafPortal.Core.Api.Services.Foundatons.Tenants;
+using Musharaf.Portal.Core.Api.Brokers.Loggings;
+using Musharaf.Portal.Core.Api.Brokers.Storages;
+using Musharaf.Portal.Core.Api.Models.Tenants;
+using Musharaf.Portal.Core.Api.Services.Foundatons.Tenants;
 using Tynamix.ObjectFiller;
 
-namespace MusharafPortal.Core.Api.Tests.Unit.Services.Foundations.Tenants
+namespace Musharaf.Portal.Core.Api.Tests.Unit.Services.Foundations.Tenants
 {
     public partial class TenantServiceTests
     {
@@ -30,7 +30,8 @@ namespace MusharafPortal.Core.Api.Tests.Unit.Services.Foundations.Tenants
         private static DateTimeOffset GetRandomDateTime() =>
             new DateTimeRange(earliestDate: new DateTime()).GetValue();
 
-        private static Filler<Tenant> CreateRandomTenantFiller(DateTimeOffset dateTime) {
+        private static Filler<Tenant> CreateRandomTenantFiller(DateTimeOffset dateTime)
+        {
             var filler = new Filler<Tenant>();
 
             filler.Setup()

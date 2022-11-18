@@ -1,9 +1,7 @@
-﻿using MusharafPortal.Core.Api.Models.Tenants;
-using MusharafPortal.Core.Api.Models.Tenants.Exceptions;
-using System.Data;
-using System.Security.Cryptography.Xml;
+﻿using Musharaf.Portal.Core.Api.Models.Tenants;
+using Musharaf.Portal.Core.Api.Models.Tenants.Exceptions;
 
-namespace MusharafPortal.Core.Api.Services.Foundatons.Tenants
+namespace Musharaf.Portal.Core.Api.Services.Foundatons.Tenants
 {
     public partial class TenantService
     {

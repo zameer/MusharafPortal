@@ -1,6 +1,6 @@
-﻿using MusharafPortal.Core.Api.Models.Tenants;
+﻿using Musharaf.Portal.Core.Api.Models.Tenants;
 
-namespace MusharafPortal.Core.Api.Services.Foundatons.Tenants
+namespace Musharaf.Portal.Core.Api.Services.Foundatons.Tenants
 {
     public interface ITenantService
     {
@@ -8,6 +8,6 @@ namespace MusharafPortal.Core.Api.Services.Foundatons.Tenants
         ValueTask<Tenant> RetreiveTenantByIdAsync(Guid Id);
         IQueryable<Tenant> RetrieveAllTenants();
         ValueTask<Tenant> ModifyTenantAsync(Tenant tenant);
-        ValueTask<Tenant> RemoveTenantAsync(Guid Id);
+        ValueTask<Tenant> RemoveTenantByIdAsync(Guid Id);
     }
 }

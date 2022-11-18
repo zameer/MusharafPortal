@@ -1,8 +1,8 @@
 ﻿using FluentAssertions;
 using Moq;
-using MusharafPortal.Core.Api.Models.Tenants;
+using Musharaf.Portal.Core.Api.Models.Tenants;
 
-namespace MusharafPortal.Core.Api.Tests.Unit.Services.Foundations.Tenants
+namespace Musharaf.Portal.Core.Api.Tests.Unit.Services.Foundations.Tenants
 {
     public partial class TenantServiceTests
     {
@@ -27,7 +27,7 @@ namespace MusharafPortal.Core.Api.Tests.Unit.Services.Foundations.Tenants
             // then
             insertedTenant.Should().BeEquivalentTo(insertedTenant);
 
-            storageBrokerMock.Verify(broker => 
+            storageBrokerMock.Verify(broker =>
                 broker.InsertTenantAsync(inputTenant), Times.Once());
 
             storageBrokerMock.VerifyNoOtherCalls();

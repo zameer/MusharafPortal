@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MusharafPortal.Core.Api.Models.Tenants;
-using MusharafPortal.Core.Api.Models.Tenants.Exceptions;
-using MusharafPortal.Core.Api.Services.Foundatons.Tenants;
+using Musharaf.Portal.Core.Api.Models.Tenants;
+using Musharaf.Portal.Core.Api.Models.Tenants.Exceptions;
+using Musharaf.Portal.Core.Api.Services.Foundatons.Tenants;
 using RESTFulSense.Controllers;
 
-namespace MusharafPortal.Core.Api.Controllers
+namespace Musharaf.Portal.Core.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -121,6 +121,39 @@ namespace MusharafPortal.Core.Api.Controllers
                 string innerMessage = GetInnerMessage(tenantValidationException);
 
                 return BadRequest(innerMessage);
+            }
+            catch (TenantDependencyException tenantDependencyException)
+            {
+                return Problem(tenantDependencyException.Message);
+            }
+            catch (TenantServiceException tenantServiceException)
+            {
+                return Problem(tenantServiceException.Message);
+            }
+        }
+
+        [HttpDelete("{tenantId}")]
+        public async ValueTask<ActionResult<Tenant>> DeleteTenantAsync(Guid tenantId)
+        {
+            try
+            {
+                Tenant storageTenant =
+                    await this.tenantService.RemoveTenantByIdAsync(tenantId);
+
+                return Ok(storageTenant);
+            }
+            catch (TenantValidationException tenantValidationException)
+                when (tenantValidationException.InnerException is NotFoundTenantException)
+            {
+                string innerMessage = GetInnerMessage(tenantValidationException);
+
+                return NotFound(innerMessage);
+            }
+            catch (TenantValidationException tenantValidationException)
+            {
+                string innerMessage = GetInnerMessage(tenantValidationException);
+
+                return BadRequest(tenantValidationException);
             }
             catch (TenantDependencyException tenantDependencyException)
             {

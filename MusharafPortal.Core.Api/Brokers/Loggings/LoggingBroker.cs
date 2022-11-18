@@ -1,4 +1,4 @@
-﻿namespace MusharafPortal.Core.Api.Brokers.Loggings
+﻿namespace Musharaf.Portal.Core.Api.Brokers.Loggings
 {
     public class LoggingBroker : ILoggingBroker
     {

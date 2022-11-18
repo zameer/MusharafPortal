@@ -1,8 +1,8 @@
-﻿using MusharafPortal.Core.Api.Brokers.Loggings;
-using MusharafPortal.Core.Api.Brokers.Storages;
-using MusharafPortal.Core.Api.Models.Tenants;
+﻿using Musharaf.Portal.Core.Api.Brokers.Loggings;
+using Musharaf.Portal.Core.Api.Brokers.Storages;
+using Musharaf.Portal.Core.Api.Models.Tenants;
 
-namespace MusharafPortal.Core.Api.Services.Foundatons.Tenants
+namespace Musharaf.Portal.Core.Api.Services.Foundatons.Tenants
 {
     public partial class TenantService : ITenantService
     {
@@ -25,12 +25,12 @@ namespace MusharafPortal.Core.Api.Services.Foundatons.Tenants
             return await storageBroker.InsertTenantAsync(tenant);
         });
 
-        public ValueTask<Tenant> RetreiveTenantByIdAsync(Guid Id) => 
+        public ValueTask<Tenant> RetreiveTenantByIdAsync(Guid Id) =>
         TryCatch(async () =>
         {
             ValidateTenantId(Id);
 
-            Tenant maybeTenant = 
+            Tenant maybeTenant =
                 await this.storageBroker.SelectTenantByIdAsync(Id);
             ValidateStorageTenant(maybeTenant, Id);
 
@@ -43,9 +43,9 @@ namespace MusharafPortal.Core.Api.Services.Foundatons.Tenants
         public ValueTask<Tenant> ModifyTenantAsync(Tenant tenant) =>
         TryCatch(async () =>
         {
-            //ValidateTenantOnModify(tenant);
+            ValidateTenantOnModify(tenant);
 
-            Tenant maybeTenant = 
+            Tenant maybeTenant =
                 await this.storageBroker.SelectTenantByIdAsync(tenant.Id);
 
             ValidateStorageTenant(maybeTenant, tenant.Id);
@@ -54,7 +54,7 @@ namespace MusharafPortal.Core.Api.Services.Foundatons.Tenants
             return await this.storageBroker.UpdateTenantAsync(tenant);
         });
 
-        public ValueTask<Tenant> RemoveTenantAsync(Guid Id) =>
+        public ValueTask<Tenant> RemoveTenantByIdAsync(Guid Id) =>
         TryCatch(async () =>
         {
 

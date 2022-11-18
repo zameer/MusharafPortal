@@ -1,6 +1,6 @@
-using MusharafPortal.Core.Api.Brokers.Loggings;
-using MusharafPortal.Core.Api.Brokers.Storages;
-using MusharafPortal.Core.Api.Services.Foundatons.Tenants;
+using Musharaf.Portal.Core.Api.Brokers.Loggings;
+using Musharaf.Portal.Core.Api.Brokers.Storages;
+using Musharaf.Portal.Core.Api.Services.Foundatons.Tenants;
 
 var builder = WebApplication.CreateBuilder(args);
 

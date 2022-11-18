@@ -1,13 +1,8 @@
 ﻿using Moq;
-using MusharafPortal.Core.Api.Models.Tenants;
-using MusharafPortal.Core.Api.Models.Tenants.Exceptions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Musharaf.Portal.Core.Api.Models.Tenants;
+using Musharaf.Portal.Core.Api.Models.Tenants.Exceptions;
 
-namespace MusharafPortal.Core.Api.Tests.Unit.Services.Foundations.Tenants
+namespace Musharaf.Portal.Core.Api.Tests.Unit.Services.Foundations.Tenants
 {
     public partial class TenantServiceTests
     {

@@ -3,12 +3,12 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using MusharafPortal.Core.Api.Brokers.Storages;
+using Musharaf.Portal.Core.Api.Brokers.Storages;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace MusharafPortal.Core.Api.Migrations
+namespace Musharaf.Portal.Core.Api.Migrations
 {
     [DbContext(typeof(StorageBroker))]
     partial class StorageBrokerModelSnapshot : ModelSnapshot
@@ -22,7 +22,7 @@ namespace MusharafPortal.Core.Api.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("MusharafPortal.Core.Api.Models.Tenants.Tenant", b =>
+            modelBuilder.Entity("Musharaf.Portal.Core.Api.Models.Tenants.Tenant", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()

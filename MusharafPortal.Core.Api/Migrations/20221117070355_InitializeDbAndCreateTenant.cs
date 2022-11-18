@@ -1,9 +1,8 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace MusharafPortal.Core.Api.Migrations
+namespace Musharaf.Portal.Core.Api.Migrations
 {
     /// <inheritdoc />
     public partial class InitializeDbAndCreateTenant : Migration

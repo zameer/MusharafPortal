@@ -1,8 +1,8 @@
-﻿using MusharafPortal.Core.Api.Models.Tenants;
-using MusharafPortal.Core.Api.Models.Tenants.Exceptions;
+﻿using Musharaf.Portal.Core.Api.Models.Tenants;
+using Musharaf.Portal.Core.Api.Models.Tenants.Exceptions;
 using System.Data.SqlClient;
 
-namespace MusharafPortal.Core.Api.Services.Foundatons.Tenants
+namespace Musharaf.Portal.Core.Api.Services.Foundatons.Tenants
 {
     public partial class TenantService
     {
@@ -24,7 +24,7 @@ namespace MusharafPortal.Core.Api.Services.Foundatons.Tenants
             {
                 throw CreateAndLogValidationException(exception: notFoundTenantException);
             }
-            catch(InvalidTenantException invalidTenantException)
+            catch (InvalidTenantException invalidTenantException)
             {
                 throw CreateAndLogValidationException(exception: invalidTenantException);
             }

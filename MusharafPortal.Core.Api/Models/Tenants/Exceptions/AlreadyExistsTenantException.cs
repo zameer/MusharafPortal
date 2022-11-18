@@ -1,6 +1,6 @@
 ﻿using Xeptions;
 
-namespace MusharafPortal.Core.Api.Models.Tenants.Exceptions
+namespace Musharaf.Portal.Core.Api.Models.Tenants.Exceptions
 {
     public class AlreadyExistsTenantException : Xeption
     {

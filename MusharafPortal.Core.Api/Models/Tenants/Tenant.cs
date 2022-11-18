@@ -1,4 +1,4 @@
-﻿namespace MusharafPortal.Core.Api.Models.Tenants
+﻿namespace Musharaf.Portal.Core.Api.Models.Tenants
 {
     public class Tenant : IAuditable
     {

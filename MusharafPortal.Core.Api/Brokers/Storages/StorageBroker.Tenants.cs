@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
-using MusharafPortal.Core.Api.Models.Tenants;
+using Musharaf.Portal.Core.Api.Models.Tenants;
 
-namespace MusharafPortal.Core.Api.Brokers.Storages
+namespace Musharaf.Portal.Core.Api.Brokers.Storages
 {
     public partial class StorageBroker
     {
