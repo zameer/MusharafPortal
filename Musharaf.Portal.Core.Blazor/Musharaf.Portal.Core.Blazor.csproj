@@ -10,8 +10,4 @@
     <PackageReference Include="RESTFulSense" Version="2.9.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Services\Foundations\" />
-  </ItemGroup>
-
 </Project>
