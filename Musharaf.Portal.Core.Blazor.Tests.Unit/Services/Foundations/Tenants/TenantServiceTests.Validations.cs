@@ -26,11 +26,11 @@ namespace Musharaf.Portal.Core.Blazor.Tests.Unit.Services.Foundations.Tenants
 
             this.loggingBrokerMock.Verify(broker =>
                 broker.LogError(
-                    It.Is(SameExceptionAs(expectedTenantValidationException))), 
+                    It.Is(SameExceptionAs(expectedTenantValidationException))),
                         Times.Once);
 
             this.apiBrokerMock.Verify(broker =>
-                broker.PostTenantAsync(It.IsAny<Tenant>()), 
+                broker.PostTenantAsync(It.IsAny<Tenant>()),
                     Times.Never);
 
             this.apiBrokerMock.VerifyNoOtherCalls();
@@ -46,7 +46,7 @@ namespace Musharaf.Portal.Core.Blazor.Tests.Unit.Services.Foundations.Tenants
             Tenant invalidTenant = randomTenant;
             invalidTenant.Id = invalidId;
 
-            var invalidTenantException = 
+            var invalidTenantException =
                 new InvalidTenantException(
                     parameterName: nameof(Tenant.Id),
                     parameterValue: invalidTenant.Id);

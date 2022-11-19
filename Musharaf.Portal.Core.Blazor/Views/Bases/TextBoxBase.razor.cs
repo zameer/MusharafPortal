@@ -6,7 +6,7 @@ namespace Musharaf.Portal.Core.Blazor.Views.Bases
     {
         [Parameter]
         public string Value { get; set; }
-        [Parameter] 
+        [Parameter]
         public string Placeholder { get; set; }
 
         public void SetValue(string value) => this.Value = value;

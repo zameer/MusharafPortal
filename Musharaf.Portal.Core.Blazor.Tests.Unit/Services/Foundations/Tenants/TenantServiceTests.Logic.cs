@@ -20,7 +20,7 @@ namespace Musharaf.Portal.Core.Blazor.Tests.Unit.Services.Foundations.Tenants
                 .ReturnsAsync(retrievedTenant);
 
             // when
-            Tenant actualTenant = 
+            Tenant actualTenant =
                 await this.tenantService
                 .CreateTenantAsync(inputTenant);
 
@@ -28,7 +28,7 @@ namespace Musharaf.Portal.Core.Blazor.Tests.Unit.Services.Foundations.Tenants
             actualTenant.Should().BeEquivalentTo(expectedTenant);
 
             this.apiBrokerMock.Verify(broker =>
-                broker.PostTenantAsync(inputTenant), 
+                broker.PostTenantAsync(inputTenant),
                 Times.Once());
 
             this.apiBrokerMock.VerifyNoOtherCalls();

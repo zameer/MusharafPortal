@@ -9,7 +9,7 @@ namespace Musharaf.Portal.Core.Blazor.Brokers.Apis
         private readonly HttpClient httpClient;
 
         public ApiBroker(
-            HttpClient httpClient, 
+            HttpClient httpClient,
             IConfiguration configuration)
         {
             this.httpClient = httpClient;

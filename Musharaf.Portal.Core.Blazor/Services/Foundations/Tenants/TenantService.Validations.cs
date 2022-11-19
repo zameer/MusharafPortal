@@ -1,6 +1,5 @@
 ﻿using Musharaf.Portal.Core.Blazor.Models.Tenants;
 using Musharaf.Portal.Core.Blazor.Models.Tenants.Exceptions;
-using System.Data;
 
 namespace Musharaf.Portal.Core.Blazor.Services.Foundations.Tenants
 {
@@ -28,7 +27,8 @@ namespace Musharaf.Portal.Core.Blazor.Services.Foundations.Tenants
             }
         }
 
-        private static dynamic IsValidX(Guid id) => new {
+        private static dynamic IsValidX(Guid id) => new
+        {
             Condition = id == Guid.Empty,
             Message = "Id is required"
         };

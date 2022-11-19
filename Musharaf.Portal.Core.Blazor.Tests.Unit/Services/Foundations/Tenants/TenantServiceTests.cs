@@ -29,7 +29,7 @@ namespace Musharaf.Portal.Core.Blazor.Tests.Unit.Services.Foundations.Tenants
 
         private Expression<Func<Exception, bool>> SameExceptionAs(Exception expectedException)
         {
-            return actualException => actualException.Message == expectedException.Message 
+            return actualException => actualException.Message == expectedException.Message
                 && actualException.InnerException.Message == expectedException.InnerException.Message;
         }
 
