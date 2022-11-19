@@ -77,18 +77,19 @@ namespace Musharaf.Portal.Core.Blazor.Tests.Unit.Services.Foundations.Tenants
         [InlineData(null)]
         [InlineData("")]
         [InlineData(" ")]
-        public async Task ShouldThrowValidationExceptionOnCreateIfTenantIdIsInvalidAndLogItAsync()
+        public async Task ShouldThrowValidationExceptionOnCreateIfTenantNameIsInvalidAndLogItAsync(
+            string tenantName)
         {
             // given
-            Guid invalidId = Guid.Empty;
+            string invalidName = tenantName;
             Tenant randomTenant = CreateRandomTenant();
             Tenant invalidTenant = randomTenant;
-            invalidTenant.Id = invalidId;
+            invalidTenant.Name = invalidName;
 
             var invalidTenantException =
                 new InvalidTenantException(
-                    parameterName: nameof(Tenant.Id),
-                    parameterValue: invalidTenant.Id);
+                    parameterName: nameof(Tenant.Name),
+                    parameterValue: invalidTenant.Name);
 
             var expectedTenantValidationException = new TenantValidationException(invalidTenantException);
 

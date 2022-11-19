@@ -11,7 +11,8 @@ namespace Musharaf.Portal.Core.Blazor.Services.Foundations.Tenants
             ValidateTenant(tenant);
 
             Validate(
-                (Rule: IsValidX(tenant.Id), Parameter: nameof(tenant.Id))
+                (Rule: IsValidX(tenant.Id), Parameter: nameof(tenant.Id)),
+                (Rule: IsValidX(tenant.Name), Parameter: nameof(tenant.Name))
             );
         }
 
@@ -26,6 +27,12 @@ namespace Musharaf.Portal.Core.Blazor.Services.Foundations.Tenants
         private static dynamic IsValidX(Guid id) => new {
             Condition = id == Guid.Empty,
             Message = "Id is required"
+        };
+
+        private static dynamic IsValidX(string text) => new
+        {
+            Condition = string.IsNullOrWhiteSpace(text),
+            Message = "Text is required"
         };
 
         private static void Validate(params (dynamic Rule, string Parameter)[] validations)
