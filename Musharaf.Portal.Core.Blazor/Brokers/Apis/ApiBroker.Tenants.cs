@@ -6,6 +6,6 @@ namespace Musharaf.Portal.Core.Blazor.Brokers.Apis
     {
         private const string RelativeUrl = "api/tenants";
         public async ValueTask<Tenant> PostTenantAsync(Tenant tenant) =>
-            await this.apiClient.PostContentAsync(RelativeUrl, tenant);
+            await this.PostAsync(RelativeUrl, tenant);
     }
 }
