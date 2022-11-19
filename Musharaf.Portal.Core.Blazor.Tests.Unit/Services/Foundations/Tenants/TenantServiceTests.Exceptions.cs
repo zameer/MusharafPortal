@@ -51,5 +51,44 @@ namespace Musharaf.Portal.Core.Blazor.Tests.Unit.Services.Foundations.Tenants
             this.apiBrokerMock.VerifyNoOtherCalls();
             this.loggingBrokerMock.VerifyNoOtherCalls();
         }
+        [Fact]
+        public async Task ShouldThrowCriticalDependencyValidationExceptionOnCreateIfUrlNotFoundErrorOccursAndLogItAsync()
+        {
+            // given
+            Tenant someTenant = CreateRandomTenant();
+            string exceptionMessage = GetRandomString();
+            var responseMessage = new HttpResponseMessage();
+
+            var httpResponseUrlNotFoundException = new HttpResponseUrlNotFoundException(
+                responseMessage: responseMessage,
+                message: exceptionMessage);
+
+            var expectedTenantDependencyException =
+                new TenantDependencyException(
+                    httpResponseUrlNotFoundException);
+
+            this.apiBrokerMock.Setup(broker =>
+               broker.PostTenantAsync(someTenant))
+                .ThrowsAsync(httpResponseUrlNotFoundException);
+
+            // when
+            ValueTask<Tenant> createTenantTask =
+                this.tenantService.CreateTenantAsync(someTenant);
+
+            // then
+            await Assert.ThrowsAsync<TenantDependencyException>(() =>
+                createTenantTask.AsTask());
+
+            this.apiBrokerMock.Verify(broker =>
+                broker.PostTenantAsync(It.IsAny<Tenant>()),
+                Times.Once);
+
+            this.loggingBrokerMock.Verify(broker =>
+                broker.LogCritical(It.Is(SameExceptionAs(expectedTenantDependencyException))),
+                Times.Once);
+
+            this.apiBrokerMock.VerifyNoOtherCalls();
+            this.loggingBrokerMock.VerifyNoOtherCalls();
+        }
     }
 }
