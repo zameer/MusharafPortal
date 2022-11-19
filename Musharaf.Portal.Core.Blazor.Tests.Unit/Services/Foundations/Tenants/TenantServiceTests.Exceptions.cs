@@ -119,5 +119,45 @@ namespace Musharaf.Portal.Core.Blazor.Tests.Unit.Services.Foundations.Tenants
             this.apiBrokerMock.VerifyNoOtherCalls();
             this.loggingBrokerMock.VerifyNoOtherCalls();
         }
+
+        [Fact]
+        public async Task ShouldThrowDependencyExceptionOnCreateIfServerInternalErrorOccursAndLogItAsync()
+        {
+            // given
+            Tenant someTenant = CreateRandomTenant();
+            string exceptionMessage = GetRandomString();
+            var responseMessage = new HttpResponseMessage();
+
+            var httpResponseInternalServerErrorException = new HttpResponseInternalServerErrorException(
+                responseMessage: responseMessage,
+                message: exceptionMessage);
+
+            var expectedDependencyValidationException =
+                new TenantDependencyValidationException(
+                    httpResponseInternalServerErrorException);
+
+            this.apiBrokerMock.Setup(broker =>
+               broker.PostTenantAsync(someTenant))
+                .ThrowsAsync(httpResponseInternalServerErrorException);
+
+            // when
+            ValueTask<Tenant> createTenantTask =
+                this.tenantService.CreateTenantAsync(someTenant);
+
+            // then
+            await Assert.ThrowsAsync<TenantDependencyValidationException>(() =>
+                createTenantTask.AsTask());
+
+            this.apiBrokerMock.Verify(broker =>
+                broker.PostTenantAsync(It.IsAny<Tenant>()),
+                Times.Once);
+
+            this.loggingBrokerMock.Verify(broker =>
+                broker.LogCritical(It.Is(SameExceptionAs(expectedDependencyValidationException))),
+                Times.Once);
+
+            this.apiBrokerMock.VerifyNoOtherCalls();
+            this.loggingBrokerMock.VerifyNoOtherCalls();
+        }
     }
 }
