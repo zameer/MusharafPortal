@@ -14,7 +14,8 @@ namespace Musharaf.Portal.Core.Blazor.Services.Foundations.Tenants
                 (Rule: IsValidX(tenant.Id), Parameter: nameof(tenant.Id)),
                 (Rule: IsValidX(tenant.Name), Parameter: nameof(tenant.Name)),
                 (Rule: IsValidX(tenant.CreatedBy), Parameter: nameof(tenant.CreatedBy)),
-                (Rule: IsValidX(tenant.UpdatedBy), Parameter: nameof(tenant.UpdatedBy))
+                (Rule: IsValidX(tenant.UpdatedBy), Parameter: nameof(tenant.UpdatedBy)),
+                (Rule: IsValidX(tenant.CreatedDate), Parameter: nameof(tenant.CreatedDate))
             );
         }
 
@@ -35,6 +36,12 @@ namespace Musharaf.Portal.Core.Blazor.Services.Foundations.Tenants
         {
             Condition = string.IsNullOrWhiteSpace(text),
             Message = "Text is required"
+        };
+
+        private static dynamic IsValidX(DateTimeOffset datetime) => new
+        {
+            Condition = datetime == default,
+            Message = "Date is required"
         };
 
         private static void Validate(params (dynamic Rule, string Parameter)[] validations)
