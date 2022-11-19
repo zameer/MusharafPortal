@@ -150,6 +150,42 @@ namespace Musharaf.Portal.Core.Blazor.Tests.Unit.Services.Foundations.Tenants
         }
 
         [Fact]
+        public async Task ShouldThrowValidationExceptionOnCreateIfCreatedDateIsInvalidAndLogItAsync()
+        {
+            // given
+            DateTimeOffset invalidDate = default;
+            Tenant randomTenant = CreateRandomTenant();
+            Tenant invalidTenant = randomTenant;
+            invalidTenant.CreatedDate = invalidDate;
+
+            var invalidTenantException =
+                new InvalidTenantException(
+                    parameterName: nameof(Tenant.CreatedDate),
+                    parameterValue: invalidTenant.CreatedDate);
+
+            var expectedTenantValidationException = new TenantValidationException(invalidTenantException);
+
+            // when
+            ValueTask<Tenant> createTenantTask =
+                this.tenantService.CreateTenantAsync(invalidTenant);
+
+            // then
+            await Assert.ThrowsAsync<TenantValidationException>(() =>
+                createTenantTask.AsTask());
+
+            this.loggingBrokerMock.Verify(broker =>
+                broker.LogError(It.IsAny<TenantValidationException>()),
+                    Times.Once);
+
+            this.apiBrokerMock.Verify(broker =>
+                broker.PostTenantAsync(It.IsAny<Tenant>()),
+                Times.Never);
+
+            this.loggingBrokerMock.VerifyNoOtherCalls();
+            this.apiBrokerMock.VerifyNoOtherCalls();
+        }
+
+        [Fact]
         public async Task ShouldThrowValidationExceptionOnCreateIfUpdatedByIsInvalidAndLogItAsync()
         {
             // given
