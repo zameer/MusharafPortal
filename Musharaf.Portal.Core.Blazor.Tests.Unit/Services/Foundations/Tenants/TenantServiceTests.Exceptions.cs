@@ -142,7 +142,7 @@ namespace Musharaf.Portal.Core.Blazor.Tests.Unit.Services.Foundations.Tenants
 
         [Theory]
         [MemberData(nameof(DependencyApiException))]
-        public async Task ShouldThrowDependencyExceptionOnCreateIfServerInternalErrorOccursAndLogItAsync(
+        public async Task ShouldThrowDependencyExceptionOnCreateIfServerDependencyApiErrorOccursAndLogItAsync(
             Exception dependencyApiException)
         {
             // given
