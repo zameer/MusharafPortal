@@ -51,11 +51,9 @@ namespace Musharaf.Portal.Core.Blazor.Tests.Unit.Services.Foundations.Tenants
             this.apiBrokerMock.VerifyNoOtherCalls();
             this.loggingBrokerMock.VerifyNoOtherCalls();
         }
-        [Fact]
-        public async Task ShouldThrowCriticalDependencyValidationExceptionOnCreateIfUrlNotFoundErrorOccursAndLogItAsync()
+
+        public static TheoryData CriticalApiException()
         {
-            // given
-            Tenant someTenant = CreateRandomTenant();
             string exceptionMessage = GetRandomString();
             var responseMessage = new HttpResponseMessage();
 
@@ -63,13 +61,32 @@ namespace Musharaf.Portal.Core.Blazor.Tests.Unit.Services.Foundations.Tenants
                 responseMessage: responseMessage,
                 message: exceptionMessage);
 
+            var httpResponseUnauthorizedException = new HttpResponseUnauthorizedException(
+                responseMessage: responseMessage,
+                message: exceptionMessage);
+
+            return new TheoryData<Exception>
+            {
+                httpResponseUrlNotFoundException,
+                httpResponseUnauthorizedException
+            };
+        }
+
+        [Theory]
+        [MemberData(nameof(CriticalApiException))]
+        public async Task ShouldThrowCriticalDependencyValidationExceptionOnCreateIfUrlNotFoundErrorOccursAndLogItAsync(
+            Exception httpResponseCriticalException)
+        {
+            // given
+            Tenant someTenant = CreateRandomTenant();
+
             var expectedTenantDependencyException =
                 new TenantDependencyException(
-                    httpResponseUrlNotFoundException);
+                    httpResponseCriticalException);
 
             this.apiBrokerMock.Setup(broker =>
                broker.PostTenantAsync(someTenant))
-                .ThrowsAsync(httpResponseUrlNotFoundException);
+                .ThrowsAsync(httpResponseCriticalException);
 
             // when
             ValueTask<Tenant> createTenantTask =
