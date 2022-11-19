@@ -176,5 +176,39 @@ namespace Musharaf.Portal.Core.Blazor.Tests.Unit.Services.Foundations.Tenants
             this.apiBrokerMock.VerifyNoOtherCalls();
             this.loggingBrokerMock.VerifyNoOtherCalls();
         }
+
+        [Fact]
+        public async Task ShouldThrowServiceExceptionOnCreateIfErrorOccursAndLogItAsync()
+        {
+            // given
+            Tenant someTenant = CreateRandomTenant();
+            var serviceException = new Exception();
+
+            var expectedTenantServiceException =
+                new TenantServiceException(serviceException);
+
+            this.apiBrokerMock.Setup(broker => 
+                broker.PostTenantAsync(It.IsAny<Tenant>()))
+                .ThrowsAsync(serviceException);
+
+            // when
+            ValueTask<Tenant> createTenantTask =
+                this.tenantService.CreateTenantAsync(someTenant);
+
+            // then
+            await Assert.ThrowsAsync<TenantServiceException>(() =>
+                createTenantTask.AsTask());
+
+            this.apiBrokerMock.Verify(broker =>
+                broker.PostTenantAsync(It.IsAny<Tenant>()),
+                Times.Once);
+
+            this.loggingBrokerMock.Verify(broker =>
+                broker.LogError(It.Is(SameExceptionAs(expectedTenantServiceException))),
+                Times.Once);
+
+            this.apiBrokerMock.VerifyNoOtherCalls();
+            this.loggingBrokerMock.VerifyNoOtherCalls();
+        }
     }
 }
