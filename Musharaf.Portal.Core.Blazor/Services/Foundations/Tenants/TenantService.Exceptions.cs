@@ -17,11 +17,16 @@ namespace Musharaf.Portal.Core.Blazor.Services.Foundations.Tenants
             {
                 throw CreateAndLogValidationException(nullTenantException);
             }
+            catch (InvalidTenantException invalidTenantException)
+            {
+                throw CreateAndLogValidationException(invalidTenantException);
+            }
+
         }
 
-        private TenantValidationException CreateAndLogValidationException(NullTenantException nullTenantException)
+        private TenantValidationException CreateAndLogValidationException(Exception exception)
         {
-            var tenantValidationException = new TenantValidationException(nullTenantException);
+            var tenantValidationException = new TenantValidationException(exception);
             this.loggingBroker.LogError(tenantValidationException);
 
             return tenantValidationException;
