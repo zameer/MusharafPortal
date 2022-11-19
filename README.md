@@ -1,1 +1,1 @@
-# MusharafPortal.Web.Api
+# MusharafPortal.Core
