@@ -26,7 +26,7 @@ namespace Musharaf.Portal.Core.Blazor.Tests.Unit.Services.Foundations.Tenants
 
             var expectedTenantDependencyValidationException =
                 new TenantDependencyValidationException(
-                    httpResponseBadRequestException.InnerException);
+                    httpResponseBadRequestException);
 
             this.apiBrokerMock.Setup(broker =>
                broker.PostTenantAsync(someTenant))
@@ -45,7 +45,7 @@ namespace Musharaf.Portal.Core.Blazor.Tests.Unit.Services.Foundations.Tenants
                 Times.Once);
 
             this.loggingBrokerMock.Verify(broker =>
-                broker.LogError(It.IsAny<TenantDependencyValidationException>()),
+                broker.LogError(It.Is(SameExceptionAs(expectedTenantDependencyValidationException))),
                 Times.Once);
 
             this.apiBrokerMock.VerifyNoOtherCalls();

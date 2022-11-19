@@ -39,7 +39,7 @@ namespace Musharaf.Portal.Core.Blazor.Services.Foundations.Tenants
 
         private TenantDependencyValidationException CreateAndLogDependencyValidationException(Exception exception)
         {
-            var tenantDependencyValidationException = new TenantDependencyValidationException(exception.InnerException);
+            var tenantDependencyValidationException = new TenantDependencyValidationException(exception);
             this.loggingBroker.LogError(tenantDependencyValidationException);
 
             return tenantDependencyValidationException;
