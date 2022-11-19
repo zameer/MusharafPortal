@@ -15,7 +15,8 @@ namespace Musharaf.Portal.Core.Blazor.Services.Foundations.Tenants
                 (Rule: IsValidX(tenant.Name), Parameter: nameof(tenant.Name)),
                 (Rule: IsValidX(tenant.CreatedBy), Parameter: nameof(tenant.CreatedBy)),
                 (Rule: IsValidX(tenant.UpdatedBy), Parameter: nameof(tenant.UpdatedBy)),
-                (Rule: IsValidX(tenant.CreatedDate), Parameter: nameof(tenant.CreatedDate))
+                (Rule: IsValidX(tenant.CreatedDate), Parameter: nameof(tenant.CreatedDate)),
+                (Rule: IsValidX(tenant.UpdatedDate), Parameter: nameof(tenant.UpdatedDate))
             );
         }
 
