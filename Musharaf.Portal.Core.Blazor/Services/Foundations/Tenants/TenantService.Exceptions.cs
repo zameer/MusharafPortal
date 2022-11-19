@@ -46,6 +46,10 @@ namespace Musharaf.Portal.Core.Blazor.Services.Foundations.Tenants
             {
                 throw CreateAndLogDependencyException(httpResponseException);
             }
+            catch(Exception exception)
+            {
+                throw CreateAndLogServiceException(exception);
+            }
         }
 
         private TenantValidationException CreateAndLogValidationException(Exception exception)
@@ -77,6 +81,13 @@ namespace Musharaf.Portal.Core.Blazor.Services.Foundations.Tenants
             this.loggingBroker.LogError(tenantDependencyException);
 
             return tenantDependencyException;
+        }
+        private TenantServiceException CreateAndLogServiceException(Exception exception)
+        {
+            var tenantServiceException = new TenantServiceException(exception);
+            this.loggingBroker.LogError(tenantServiceException);
+
+            return tenantServiceException;
         }
     }
 }
