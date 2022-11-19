@@ -33,6 +33,8 @@ namespace Musharaf.Portal.Core.Blazor.Tests.Unit.Services.Foundations.Tenants
                 && actualException.InnerException.Message == expectedException.InnerException.Message;
         }
 
+        private static string GetRandomString() => new MnemonicString().GetValue();
+
         private static Filler<Tenant> CreateTenantFiller()
         {
             var filler = new Filler<Tenant>();
