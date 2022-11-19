@@ -220,5 +220,41 @@ namespace Musharaf.Portal.Core.Blazor.Tests.Unit.Services.Foundations.Tenants
             this.loggingBrokerMock.VerifyNoOtherCalls();
             this.apiBrokerMock.VerifyNoOtherCalls();
         }
+
+        [Fact]
+        public async Task ShouldThrowValidationExceptionOnCreateIfUpdatedDateIsInvalidAndLogItAsync()
+        {
+            // given
+            DateTimeOffset invalidDate = default;
+            Tenant randomTenant = CreateRandomTenant();
+            Tenant invalidTenant = randomTenant;
+            invalidTenant.UpdatedDate = invalidDate;
+
+            var invalidTenantException =
+                new InvalidTenantException(
+                    parameterName: nameof(Tenant.UpdatedDate),
+                    parameterValue: invalidTenant.UpdatedDate);
+
+            var expectedTenantValidationException = new TenantValidationException(invalidTenantException);
+
+            // when
+            ValueTask<Tenant> createTenantTask =
+                this.tenantService.CreateTenantAsync(invalidTenant);
+
+            // then
+            await Assert.ThrowsAsync<TenantValidationException>(() =>
+                createTenantTask.AsTask());
+
+            this.loggingBrokerMock.Verify(broker =>
+                broker.LogError(It.IsAny<TenantValidationException>()),
+                    Times.Once);
+
+            this.apiBrokerMock.Verify(broker =>
+                broker.PostTenantAsync(It.IsAny<Tenant>()),
+                Times.Never);
+
+            this.loggingBrokerMock.VerifyNoOtherCalls();
+            this.apiBrokerMock.VerifyNoOtherCalls();
+        }
     }
 }
