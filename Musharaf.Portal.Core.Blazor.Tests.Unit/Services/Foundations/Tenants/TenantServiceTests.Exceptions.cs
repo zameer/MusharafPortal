@@ -120,25 +120,42 @@ namespace Musharaf.Portal.Core.Blazor.Tests.Unit.Services.Foundations.Tenants
             this.loggingBrokerMock.VerifyNoOtherCalls();
         }
 
-        [Fact]
-        public async Task ShouldThrowDependencyExceptionOnCreateIfServerInternalErrorOccursAndLogItAsync()
+        public static TheoryData DependencyApiException()
         {
-            // given
-            Tenant someTenant = CreateRandomTenant();
             string exceptionMessage = GetRandomString();
             var responseMessage = new HttpResponseMessage();
+
+            var httpResponseException = new HttpResponseException(
+                httpResponseMessage: responseMessage,
+                message: exceptionMessage);
 
             var httpResponseInternalServerErrorException = new HttpResponseInternalServerErrorException(
                 responseMessage: responseMessage,
                 message: exceptionMessage);
 
+            return new TheoryData<Exception>
+            {
+                httpResponseException,
+                httpResponseInternalServerErrorException
+            };
+        }
+
+        [Theory]
+        [MemberData(nameof(DependencyApiException))]
+        public async Task ShouldThrowDependencyExceptionOnCreateIfServerInternalErrorOccursAndLogItAsync(
+            Exception dependencyApiException)
+        {
+            // given
+            Tenant someTenant = CreateRandomTenant();
+            string exceptionMessage = GetRandomString();
+
             var expectedDependencyValidationException =
                 new TenantDependencyValidationException(
-                    httpResponseInternalServerErrorException);
+                    dependencyApiException);
 
             this.apiBrokerMock.Setup(broker =>
                broker.PostTenantAsync(someTenant))
-                .ThrowsAsync(httpResponseInternalServerErrorException);
+                .ThrowsAsync(dependencyApiException);
 
             // when
             ValueTask<Tenant> createTenantTask =
