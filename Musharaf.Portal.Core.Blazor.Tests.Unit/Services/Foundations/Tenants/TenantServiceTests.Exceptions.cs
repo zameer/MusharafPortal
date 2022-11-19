@@ -2,21 +2,13 @@
 using Musharaf.Portal.Core.Blazor.Models.Tenants;
 using Musharaf.Portal.Core.Blazor.Models.Tenants.Exceptions;
 using RESTFulSense.Exceptions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Musharaf.Portal.Core.Blazor.Tests.Unit.Services.Foundations.Tenants
 {
     public partial class TenantServiceTests
     {
-        [Fact]
-        public async Task ShouldThrowDependencyValidationExceptionOnCreateIfBadRequestErrorOccursAndLogItAsync()
+        public static TheoryData ValidationApiException()
         {
-            // given
-            Tenant someTenant = CreateRandomTenant();
             string exceptionMessage = GetRandomString();
             var responseMessage = new HttpResponseMessage();
 
@@ -24,16 +16,36 @@ namespace Musharaf.Portal.Core.Blazor.Tests.Unit.Services.Foundations.Tenants
                 responseMessage: responseMessage,
                 message: exceptionMessage);
 
+            var httpResponseConflictException = new HttpResponseConflictException(
+                responseMessage: responseMessage,
+                message: exceptionMessage);
+
+            return new TheoryData<Exception>
+            {
+                httpResponseBadRequestException,
+                httpResponseConflictException
+            };
+        }
+
+        [Theory]
+        [MemberData(nameof(ValidationApiException))]
+        public async Task ShouldThrowDependencyValidationExceptionOnCreateIfBadRequestErrorOccursAndLogItAsync(
+            Exception validationApiException)
+        {
+            // given
+            Tenant someTenant = CreateRandomTenant();
+            string exceptionMessage = GetRandomString();
+
             var expectedTenantDependencyValidationException =
                 new TenantDependencyValidationException(
-                    httpResponseBadRequestException);
+                    validationApiException);
 
             this.apiBrokerMock.Setup(broker =>
                broker.PostTenantAsync(someTenant))
-                .ThrowsAsync(httpResponseBadRequestException);
+                .ThrowsAsync(validationApiException);
 
             // when
-            ValueTask<Tenant> createTenantTask = 
+            ValueTask<Tenant> createTenantTask =
                 this.tenantService.CreateTenantAsync(someTenant);
 
             // then
