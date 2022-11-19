@@ -34,6 +34,10 @@ namespace Musharaf.Portal.Core.Blazor.Services.Foundations.Tenants
             {
                 throw CreateAndLogDependencyValidationException(httpResponseBadRequestException);
             }
+            catch (HttpResponseConflictException httpResponseConflictException)
+            {
+                throw CreateAndLogDependencyValidationException(httpResponseConflictException);
+            }
         }
 
         private TenantValidationException CreateAndLogValidationException(Exception exception)
