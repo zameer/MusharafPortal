@@ -22,10 +22,10 @@ namespace Musharaf.Portal.Core.Api.Tests.Unit.Services.Foundations.Tenants
                     .ReturnsAsync(insertedTenant);
 
             // when
-            insertedTenant = await tenantService.CreateTenantAsync(inputTenant);
+            Tenant actualTenant = await this.tenantService.CreateTenantAsync(inputTenant);
 
             // then
-            insertedTenant.Should().BeEquivalentTo(insertedTenant);
+            actualTenant.Should().BeEquivalentTo(expectedTenant);
 
             storageBrokerMock.Verify(broker =>
                 broker.InsertTenantAsync(inputTenant), Times.Once());

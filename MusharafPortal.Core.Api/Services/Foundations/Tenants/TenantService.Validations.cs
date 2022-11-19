@@ -16,11 +16,11 @@ namespace Musharaf.Portal.Core.Api.Services.Foundations.Tenants
                 (Rule: IsValidX(tenant.CreatedBy), Parameter: nameof(tenant.CreatedBy)),
                 (Rule: IsValidX(tenant.UpdatedDate), Parameter: nameof(tenant.UpdatedDate)),
                 (Rule: IsValidX(tenant.UpdatedBy), Parameter: nameof(tenant.UpdatedBy)),
-                (Rule: IsNotSame(
-                    firstId: tenant.CreatedBy,
-                    secondId: tenant.UpdatedBy,
-                    secondIdName: nameof(tenant.UpdatedBy)),
-                  Parameter: nameof(tenant.CreatedBy)),
+                //(Rule: IsNotSame(
+                //    firstId: tenant.CreatedBy,
+                //    secondId: tenant.UpdatedBy,
+                //    secondIdName: nameof(tenant.UpdatedBy)),
+                //  Parameter: nameof(tenant.CreatedBy)),
                 (Rule: IsNotSame(
                     firstDate: tenant.CreatedDate,
                     secondDate: tenant.UpdatedDate,
