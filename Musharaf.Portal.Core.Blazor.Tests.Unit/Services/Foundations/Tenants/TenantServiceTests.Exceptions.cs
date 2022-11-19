@@ -153,7 +153,7 @@ namespace Musharaf.Portal.Core.Blazor.Tests.Unit.Services.Foundations.Tenants
                 Times.Once);
 
             this.loggingBrokerMock.Verify(broker =>
-                broker.LogCritical(It.Is(SameExceptionAs(expectedDependencyValidationException))),
+                broker.LogError(It.Is(SameExceptionAs(expectedDependencyValidationException))),
                 Times.Once);
 
             this.apiBrokerMock.VerifyNoOtherCalls();

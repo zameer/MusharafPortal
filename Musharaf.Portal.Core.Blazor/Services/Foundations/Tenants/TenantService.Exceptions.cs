@@ -38,6 +38,10 @@ namespace Musharaf.Portal.Core.Blazor.Services.Foundations.Tenants
             {
                 throw CreateAndLogDependencyValidationException(httpResponseConflictException);
             }
+            catch (HttpResponseInternalServerErrorException httpResponseInternalServerErrorException)
+            {
+                throw CreateAndLogDependencyException(httpResponseInternalServerErrorException);
+            }
         }
 
         private TenantValidationException CreateAndLogValidationException(Exception exception)
@@ -59,6 +63,14 @@ namespace Musharaf.Portal.Core.Blazor.Services.Foundations.Tenants
         {
             var tenantDependencyException = new TenantDependencyException(exception);
             this.loggingBroker.LogCritical(tenantDependencyException);
+
+            return tenantDependencyException;
+        }
+
+        private TenantDependencyValidationException CreateAndLogDependencyException(Exception exception)
+        {
+            var tenantDependencyException = new TenantDependencyValidationException(exception);
+            this.loggingBroker.LogError(tenantDependencyException);
 
             return tenantDependencyException;
         }
