@@ -1,5 +1,6 @@
 ﻿using Musharaf.Portal.Core.Blazor.Models.Tenants;
 using Musharaf.Portal.Core.Blazor.Models.Tenants.Exceptions;
+using RESTFulSense.Exceptions;
 
 namespace Musharaf.Portal.Core.Blazor.Services.Foundations.Tenants
 {
@@ -21,6 +22,10 @@ namespace Musharaf.Portal.Core.Blazor.Services.Foundations.Tenants
             {
                 throw CreateAndLogValidationException(invalidTenantException);
             }
+            catch (HttpResponseBadRequestException httpResponseBadRequestException)
+            {
+                throw CreateAndLogDependencyValidationException(httpResponseBadRequestException);
+            }
 
         }
 
@@ -30,6 +35,14 @@ namespace Musharaf.Portal.Core.Blazor.Services.Foundations.Tenants
             this.loggingBroker.LogError(tenantValidationException);
 
             return tenantValidationException;
+        }
+
+        private TenantDependencyValidationException CreateAndLogDependencyValidationException(Exception exception)
+        {
+            var tenantDependencyValidationException = new TenantDependencyValidationException(exception.InnerException);
+            this.loggingBroker.LogError(tenantDependencyValidationException);
+
+            return tenantDependencyValidationException;
         }
     }
 }
