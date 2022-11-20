@@ -3,6 +3,7 @@ using Moq;
 using Musharaf.Portal.Core.Blazor.Brokers.DateTimes;
 using Musharaf.Portal.Core.Blazor.Brokers.Loggings;
 using Musharaf.Portal.Core.Blazor.Models.Tenants;
+using Musharaf.Portal.Core.Blazor.Models.TenantViews;
 using Musharaf.Portal.Core.Blazor.Services.Foundations.Tenants;
 using Musharaf.Portal.Core.Blazor.Services.Foundations.TenantViews;
 using Musharaf.Portal.Core.Blazor.Services.Foundations.Users;
@@ -60,9 +61,29 @@ namespace Musharaf.Portal.Core.Blazor.Tests.Unit.Services.Foundations.TenantView
             };
         }
 
+        private static TenantView CreateRandomTenantView() =>
+            CreateTenantViewFiller().Create();
+
+        private static Expression<Func<Exception, bool>> SameExceptionAs(Exception expectedException)
+        {
+            return actualException => actualException.Message == expectedException.Message
+                && actualException.InnerException.Message == expectedException.InnerException.Message;
+        }
+
         private static string GetRandomName() =>
             new RealNames(NameStyle.FirstName).GetValue();
+
         private static DateTimeOffset GetRandomDate() =>
             new DateTimeRange(earliestDate: new DateTime()).GetValue();
+
+        private static Filler<TenantView> CreateTenantViewFiller()
+        {
+            var filler = new Filler<TenantView>();
+
+            filler.Setup()
+                .OnType<DateTimeOffset>().Use(DateTimeOffset.UtcNow);
+
+            return filler;
+        }
     }
 }
