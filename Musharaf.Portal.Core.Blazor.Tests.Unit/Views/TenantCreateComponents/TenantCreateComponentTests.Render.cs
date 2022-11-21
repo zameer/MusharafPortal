@@ -20,9 +20,9 @@ namespace Musharaf.Portal.Core.Blazor.Tests.Unit.Views.TenantCreateComponents
             // then
             initializeTenantCreateComponent.State.Should().Be(expectedComponentState);
             initializeTenantCreateComponent.Exception.Should().BeNull();
-            initializeTenantCreateComponent.Name.Should().BeNull();
+            initializeTenantCreateComponent.NameTextBox.Should().BeNull();
             initializeTenantCreateComponent.SubmitButton.Should().BeNull();
-            initializeTenantCreateComponent.Description.Should().BeNull();
+            initializeTenantCreateComponent.DescriptionTextBox.Should().BeNull();
         }
 
         [Fact]
@@ -44,16 +44,16 @@ namespace Musharaf.Portal.Core.Blazor.Tests.Unit.Views.TenantCreateComponents
             this.renderedTenantCreateComponent.Instance.State
                 .Should().Be(expectedComponentState);
 
-            this.renderedTenantCreateComponent.Instance.Name
+            this.renderedTenantCreateComponent.Instance.NameTextBox
                 .Should().NotBeNull();
 
-            this.renderedTenantCreateComponent.Instance.Name.Placeholder
+            this.renderedTenantCreateComponent.Instance.NameTextBox.Placeholder
                 .Should().BeEquivalentTo(expectedTenantNameTextBoxPlaceholder);
 
-            this.renderedTenantCreateComponent.Instance.Description
+            this.renderedTenantCreateComponent.Instance.DescriptionTextBox
                 .Should().NotBeNull();
 
-            this.renderedTenantCreateComponent.Instance.Description.Placeholder
+            this.renderedTenantCreateComponent.Instance.DescriptionTextBox.Placeholder
                 .Should().BeEquivalentTo(expectedTenantDescriptionTextBoxPlaceholder);
 
             this.renderedTenantCreateComponent.Instance.SubmitButton

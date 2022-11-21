@@ -2,8 +2,13 @@
 <ContainerComponent 
     State="State">
     <Content>
-        <TextBoxBase 
-            @ref="Name"
-            Placeholder="Name" />
+        <TextBoxBase @ref=NameTextBox
+                     Placeholder="Name" />
+
+        <TextBoxBase @ref=DescriptionTextBox
+                     Placeholder="Description" />
+
+        <ButtonBase @ref=SubmitButton
+                    Label="Submit Tenant" />
     </Content>
 </ContainerComponent>

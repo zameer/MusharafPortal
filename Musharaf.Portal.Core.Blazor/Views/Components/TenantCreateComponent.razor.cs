@@ -15,8 +15,8 @@ namespace Musharaf.Portal.Core.Blazor.Views.Components
         public ComponentState State { get; set; }
         public TenantCreateFormComponentException Exception { get; set; }
         public TenantView TenantView { get; set; }
-        public TextBoxBase Name{ get; set; }
-        public TextBoxBase Description { get; set; }
+        public TextBoxBase NameTextBox{ get; set; }
+        public TextBoxBase DescriptionTextBox { get; set; }
         public ButtonBase SubmitButton { get; set; }
 
         protected override void OnInitialized()
