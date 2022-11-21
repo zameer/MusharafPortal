@@ -7,6 +7,46 @@ namespace Musharaf.Portal.Core.Blazor.Tests.Unit.Services.Foundations.TenantView
 {
     public partial class TenantViewServiceTests
     {
+        [Fact]
+        public async Task ShouldThrowValidationExceptionOnAddIfTenantIsNullAndLogItAsync()
+        {
+            // given
+            TenantView nullTenantView = null;
+            var nullTenantViewException = new NullTenantViewException();
+
+            var expectedTenantViewValidationException =
+                new TenantViewValidationException(nullTenantViewException);
+
+            // when
+            ValueTask<TenantView> createTenantViewTask =
+                this.tenantViewService.AddTenantViewAsync(nullTenantView);
+
+            // then
+            await Assert.ThrowsAsync<TenantViewValidationException>(() =>
+                createTenantViewTask.AsTask());
+
+            this.loggingBrokerMock.Verify(broker =>
+                broker.LogError(It.IsAny<TenantViewValidationException>()),
+                    Times.Once);
+
+            this.userServiceMock.Verify(service =>
+                service.GetCurrentlyLoggedInUser(),
+                    Times.Never);
+
+            this.dateTimeBrokerMock.Verify(broker =>
+                broker.GetCurrentDateTimeOffset(),
+                    Times.Never);
+
+            this.tenantServiceMock.Verify(broker =>
+                broker.CreateTenantAsync(It.IsAny<Tenant>()),
+                    Times.Never);
+
+            this.loggingBrokerMock.VerifyNoOtherCalls();
+            this.userServiceMock.VerifyNoOtherCalls();
+            this.dateTimeBrokerMock.VerifyNoOtherCalls();
+            this.tenantServiceMock.VerifyNoOtherCalls();
+        }
+
         [Theory]
         [InlineData(null)]
         [InlineData("")]
