@@ -57,6 +57,9 @@ namespace Musharaf.Portal.Core.Blazor.Tests.Unit.Views.TenantCreateComponents
             this.renderedTenantCreateComponent.Instance.DescriptionTextBox.Placeholder
                 .Should().BeEquivalentTo(expectedTenantDescriptionTextBoxPlaceholder);
 
+            this.renderedTenantCreateComponent.Instance.TenantTypeDropDown
+                .Should().NotBeNull();
+
             this.renderedTenantCreateComponent.Instance.SubmitButton
                 .Should().NotBeNull();
 
