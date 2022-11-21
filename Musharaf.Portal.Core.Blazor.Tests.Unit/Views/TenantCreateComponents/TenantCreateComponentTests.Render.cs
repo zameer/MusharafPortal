@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using Musharaf.Portal.Core.Blazor.Models.ContainerComponents;
+using Musharaf.Portal.Core.Blazor.Models.TenantViews;
 using Musharaf.Portal.Core.Blazor.Views.Components;
 
 namespace Musharaf.Portal.Core.Blazor.Tests.Unit.Views.TenantCreateComponents
@@ -59,6 +60,9 @@ namespace Musharaf.Portal.Core.Blazor.Tests.Unit.Views.TenantCreateComponents
 
             this.renderedTenantCreateComponent.Instance.TenantTypeDropDown
                 .Should().NotBeNull();
+
+            this.renderedTenantCreateComponent.Instance.TenantTypeDropDown.Value.GetType()
+                .Should().Be(typeof(TenantTypeView));
 
             this.renderedTenantCreateComponent.Instance.SubmitButton
                 .Should().NotBeNull();
