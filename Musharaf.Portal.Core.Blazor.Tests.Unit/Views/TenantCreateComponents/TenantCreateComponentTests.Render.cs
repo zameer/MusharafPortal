@@ -23,6 +23,7 @@ namespace Musharaf.Portal.Core.Blazor.Tests.Unit.Views.TenantCreateComponents
             initializeTenantCreateComponent.NameTextBox.Should().BeNull();
             initializeTenantCreateComponent.SubmitButton.Should().BeNull();
             initializeTenantCreateComponent.DescriptionTextBox.Should().BeNull();
+            initializeTenantCreateComponent.TenantTypeDropDown.Should().BeNull();   
         }
 
         [Fact]
