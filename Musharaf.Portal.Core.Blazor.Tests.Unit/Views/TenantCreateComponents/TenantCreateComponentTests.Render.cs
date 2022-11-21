@@ -73,9 +73,6 @@ namespace Musharaf.Portal.Core.Blazor.Tests.Unit.Views.TenantCreateComponents
             this.renderedTenantCreateComponent.Instance.SubmitButton.Label
                 .Should().BeEquivalentTo(expectedTenantSubmitButtonLabel);
 
-            this.renderedTenantCreateComponent.Instance.TenantView
-                .Should().BeNull();
-
             this.renderedTenantCreateComponent.Instance.Exception
                 .Should().BeNull();
 

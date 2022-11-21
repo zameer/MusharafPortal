@@ -22,12 +22,8 @@ namespace Musharaf.Portal.Core.Blazor.Views.Components
 
         protected override void OnInitialized()
         {
+            this.TenantView = new TenantView();
             this.State = ComponentState.Content;
-        }
-
-        public void CreateTenant()
-        {
-            var temp = this.TenantView;
         }
     }
 }
