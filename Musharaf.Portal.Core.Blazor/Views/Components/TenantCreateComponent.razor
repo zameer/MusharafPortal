@@ -8,7 +8,8 @@
                      @bind-Value=@TenantView.Name />
         <br />
         <TextBoxBase @ref=DescriptionTextBox
-                     Placeholder="Description" />
+                     Placeholder="Description"
+                     @bind-Value=@TenantView.Description />
         <br />
 
         <DropDownBase @ref=@TenantTypeDropDown
@@ -17,6 +18,6 @@
 
         <ButtonBase @ref=SubmitButton
                     Label="Submit Tenant"
-                    OnClick=@CreateTenantAsync />
+                    OnClick="@CreateTenantAsync" />
     </Content>
 </ContainerComponent>

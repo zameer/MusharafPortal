@@ -26,10 +26,8 @@ namespace Musharaf.Portal.Core.Blazor.Views.Components
             this.State = ComponentState.Content;
         }
 
-        public void CreateTenantAsync()
-        {
-            var temp = this.TenantView;
-        }
+        public async void CreateTenantAsync() =>
+            await this.TenantViewService.AddTenantViewAsync(this.TenantView);
     }
 }
 
