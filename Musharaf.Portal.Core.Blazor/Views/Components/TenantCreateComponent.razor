@@ -1,4 +1,5 @@
-﻿@using Musharaf.Portal.Core.Blazor.Views.Components.ContainerComponents
+﻿@using Musharaf.Portal.Core.Blazor.Models.TenantViews;
+@using Musharaf.Portal.Core.Blazor.Views.Components.ContainerComponents
 <ContainerComponent 
     State="State">
     <Content>
@@ -8,6 +9,11 @@
         <TextBoxBase @ref=DescriptionTextBox
                      Placeholder="Description" />
         <br />
+
+        <DropDownBase @ref=@TenantTypeDropDown
+                      TEnum="TenantTypeView" />
+        <br />
+
         <ButtonBase @ref=SubmitButton
                     Label="Submit Tenant" />
     </Content>
