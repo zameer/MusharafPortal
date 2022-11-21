@@ -15,7 +15,9 @@ namespace Musharaf.Portal.Core.Blazor.Tests.Unit.Views.TenantCreateComponents
         {
             this.tenantViewServiceMock = new Mock<ITenantViewService>();
             this.Services.AddScoped(services => tenantViewServiceMock.Object);
-            this.Services.AddServerSideBlazor();
+
+            //this.Services.AddOptions();
+            //this.JSInterop.Mode = JSRuntimeMode.Loose;
         }
     }
 }

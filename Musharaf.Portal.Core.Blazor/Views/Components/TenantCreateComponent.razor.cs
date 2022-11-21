@@ -17,6 +17,12 @@ namespace Musharaf.Portal.Core.Blazor.Views.Components
         public TenantView TenantView { get; set; }
         public TextBoxBase Name{ get; set; }
         public TextBoxBase Description { get; set; }
+        public ButtonBase SubmitButton { get; set; }
+
+        protected override void OnInitialized()
+        {
+            this.State = ComponentState.Content;
+        }
     }
 }
 

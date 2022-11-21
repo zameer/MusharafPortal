@@ -21,7 +21,31 @@ namespace Musharaf.Portal.Core.Blazor.Tests.Unit.Views.TenantCreateComponents
             initializeTenantCreateComponent.State.Should().Be(expectedComponentState);
             initializeTenantCreateComponent.Exception.Should().BeNull();
             initializeTenantCreateComponent.Name.Should().BeNull();
+            initializeTenantCreateComponent.SubmitButton.Should().BeNull();
             initializeTenantCreateComponent.Description.Should().BeNull();
+        }
+
+        [Fact]
+        public void ShouldRenderComponent()
+        {
+            // given
+            ComponentState expectedComponentState =
+                ComponentState.Content;
+
+            string expectedTenantNameTextBoxPlaceholder = "Name";
+            string expectedTenantDescriptionTextBoxPlaceholder = "Description";
+            string expectedTenantSubmitButtonLabel = "Submit Tenant";
+
+            // when
+            this.renderedTenantCreateComponent =
+                RenderComponent<TenantCreateComponent>();
+
+            // then
+            this.renderedTenantCreateComponent.Instance.State
+                .Should().Be(expectedComponentState);
+
+            this.renderedTenantCreateComponent.Instance.Name
+                .Should().NotBeNull();
         }
     }
 }
