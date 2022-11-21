@@ -7,7 +7,7 @@ using Musharaf.Portal.Core.Blazor.Services.Foundations.Users;
 
 namespace Musharaf.Portal.Core.Blazor.Services.Foundations.TenantViews
 {
-    public class TenantViewService : ITenantViewService
+    public partial class TenantViewService : ITenantViewService
     {
         private readonly ITenantService tenantService;
         private readonly IUserService userService;
@@ -26,13 +26,15 @@ namespace Musharaf.Portal.Core.Blazor.Services.Foundations.TenantViews
             this.loggingBroker = loggingBroker;
         }
 
-        public async ValueTask<TenantView> AddTenantViewAsync(TenantView tenantView)
-        {
-            Tenant tenant = MapToTenant(tenantView);
-            await this.tenantService.CreateTenantAsync(tenant);
+        public ValueTask<TenantView> AddTenantViewAsync(TenantView tenantView) =>
+            TryCatch(async () =>
+            {
+                ValidateTenantView(tenantView);
+                Tenant tenant = MapToTenant(tenantView);
+                await this.tenantService.CreateTenantAsync(tenant);
 
-            return tenantView;
-        }
+                return tenantView;
+            });
 
         private Tenant MapToTenant(TenantView tenantView)
         {

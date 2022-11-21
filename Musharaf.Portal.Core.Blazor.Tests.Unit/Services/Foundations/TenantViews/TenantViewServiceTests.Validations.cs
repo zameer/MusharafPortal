@@ -35,7 +35,7 @@ namespace Musharaf.Portal.Core.Blazor.Tests.Unit.Services.Foundations.TenantView
                 createTenantViewTask.AsTask());
 
             this.loggingBrokerMock.Verify(broker =>
-                broker.LogError(It.Is(SameExceptionAs(expectedTenantViewValidationException))),
+                broker.LogError(It.IsAny<TenantViewValidationException>()),
                     Times.Once);
 
             this.userServiceMock.Verify(service =>
