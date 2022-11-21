@@ -13,6 +13,10 @@ namespace Musharaf.Portal.Core.Blazor.Services.Foundations.TenantViews
             {
                 return await returningTenantViewFunction();
             }
+            catch (NullTenantViewException nullTenantViewException)
+            {
+                throw CreateAndLogValidationException(nullTenantViewException);
+            }
             catch (InvalidTenantViewException invalidTenantViewException)
             {
                 throw CreateAndLogValidationException(invalidTenantViewException);
