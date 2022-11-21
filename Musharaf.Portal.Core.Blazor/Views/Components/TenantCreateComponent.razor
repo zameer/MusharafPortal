@@ -4,7 +4,8 @@
     State="State">
     <Content>
         <TextBoxBase @ref=NameTextBox
-                     Placeholder="Name" />
+                     Placeholder="Name"
+                     @bind-Value=@TenantView.Name />
         <br />
         <TextBoxBase @ref=DescriptionTextBox
                      Placeholder="Description" />
@@ -15,6 +16,7 @@
         <br />
 
         <ButtonBase @ref=SubmitButton
-                    Label="Submit Tenant" />
+                    Label="Submit Tenant"
+                    OnClick=@CreateTenantAsync />
     </Content>
 </ContainerComponent>
