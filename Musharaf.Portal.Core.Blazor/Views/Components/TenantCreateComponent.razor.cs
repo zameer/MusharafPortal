@@ -7,7 +7,7 @@ using Musharaf.Portal.Core.Blazor.Views.Bases;
 
 namespace Musharaf.Portal.Core.Blazor.Views.Components
 {
-    public partial class TenantFormComponent : ComponentBase
+    public partial class TenantCreateComponent : ComponentBase
     {
         [Inject]
         public ITenantViewService TenantViewService { get; set; }

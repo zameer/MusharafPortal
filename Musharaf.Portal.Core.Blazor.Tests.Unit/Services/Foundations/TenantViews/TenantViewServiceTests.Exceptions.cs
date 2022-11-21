@@ -17,20 +17,20 @@ namespace Musharaf.Portal.Core.Blazor.Tests.Unit.Services.Foundations.TenantView
             };
         }
 
-        [Theory]
-        [MemberData(nameof(TenantServiceValidationExceptions))]
-        public async Task ShouldThrowDependencyValidationExceptionOnCreateIfTenantValidationErrorOccuredAndLogItAsync(
-            Exception tenantServiceValidationException)
-        {
-            // given
-            TenantView someTenantView = CreateRandomTenantView();
+        //[Theory]
+        //[MemberData(nameof(TenantServiceValidationExceptions))]
+        //public async Task ShouldThrowDependencyValidationExceptionOnCreateIfTenantValidationErrorOccuredAndLogItAsync(
+        //    Exception tenantServiceValidationException)
+        //{
+        //    // given
+        //    TenantView someTenantView = CreateRandomTenantView();
 
-            var expectedDependencyValidationException = 
-                new TenantViewDependencyValidationException()
+        //    var expectedDependencyValidationException = 
+        //        new TenantViewDependencyValidationException()
 
-            // when
+        //    // when
 
-            // then
-        }
+        //    // then
+        //}
     }
 }
