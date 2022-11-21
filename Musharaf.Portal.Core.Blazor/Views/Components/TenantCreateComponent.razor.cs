@@ -24,6 +24,11 @@ namespace Musharaf.Portal.Core.Blazor.Views.Components
         {
             this.State = ComponentState.Content;
         }
+
+        public void CreateTenant()
+        {
+            var temp = this.TenantView;
+        }
     }
 }
 

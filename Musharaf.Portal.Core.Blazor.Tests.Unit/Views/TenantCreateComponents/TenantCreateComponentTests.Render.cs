@@ -43,6 +43,9 @@ namespace Musharaf.Portal.Core.Blazor.Tests.Unit.Views.TenantCreateComponents
                 RenderComponent<TenantCreateComponent>();
 
             // then
+            this.renderedTenantCreateComponent.Instance.TenantView
+                .Should().NotBeNull();
+
             this.renderedTenantCreateComponent.Instance.State
                 .Should().Be(expectedComponentState);
 
