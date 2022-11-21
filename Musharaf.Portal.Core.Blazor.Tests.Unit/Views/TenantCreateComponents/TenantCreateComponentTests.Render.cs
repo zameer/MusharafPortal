@@ -49,6 +49,20 @@ namespace Musharaf.Portal.Core.Blazor.Tests.Unit.Views.TenantCreateComponents
 
             this.renderedTenantCreateComponent.Instance.Name.Placeholder
                 .Should().BeEquivalentTo(expectedTenantNameTextBoxPlaceholder);
+
+            this.renderedTenantCreateComponent.Instance.Description
+                .Should().NotBeNull();
+
+            this.renderedTenantCreateComponent.Instance.Description.Placeholder
+                .Should().BeEquivalentTo(expectedTenantDescriptionTextBoxPlaceholder);
+
+            this.renderedTenantCreateComponent.Instance.SubmitButton
+                .Should().NotBeNull();
+
+            this.renderedTenantCreateComponent.Instance.SubmitButton.Label
+                .Should().BeEquivalentTo(expectedTenantSubmitButtonLabel);
+
+            this.tenantViewServiceMock.VerifyNoOtherCalls();
         }
     }
 }
