@@ -1,6 +1,9 @@
 using Musharaf.Portal.Core.Blazor.Brokers.Apis;
 using Musharaf.Portal.Core.Blazor.Brokers.DateTimes;
 using Musharaf.Portal.Core.Blazor.Brokers.Loggings;
+using Musharaf.Portal.Core.Blazor.Services.Foundations.Tenants;
+using Musharaf.Portal.Core.Blazor.Services.Foundations.TenantViews;
+using Musharaf.Portal.Core.Blazor.Services.Foundations.Users;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +16,10 @@ builder.Services.AddScoped<ILogger, Logger<ILoggingBroker>>();
 builder.Services.AddScoped<ILoggingBroker, LoggingBroker>();
 builder.Services.AddScoped<IDateTimeBroker, DateTimeBroker>();
 builder.Services.AddScoped<IApiBroker, ApiBroker>();
+builder.Services.AddScoped<IDateTimeBroker, DateTimeBroker>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ITenantService, TenantService>();
+builder.Services.AddScoped<ITenantViewService, TenantViewService>();
 
 builder.Services.AddRazorPages(options =>
 {

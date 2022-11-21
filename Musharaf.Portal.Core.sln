@@ -11,9 +11,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MusharafPortalBlazor", "Mus
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Musharaf.Portal.Core.Api.Tests.Unit", "MusharafPortal.Core.Api.Tests.Unit\Musharaf.Portal.Core.Api.Tests.Unit.csproj", "{0F7C4C64-4E4B-473A-8827-9D7C8AA2E790}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Musharaf.Portal.Core.Blazor", "Musharaf.Portal.Core.Blazor\Musharaf.Portal.Core.Blazor.csproj", "{7C02EFA5-C5E1-473E-B342-87CBB2173618}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Musharaf.Portal.Core.Blazor", "Musharaf.Portal.Core.Blazor\Musharaf.Portal.Core.Blazor.csproj", "{7C02EFA5-C5E1-473E-B342-87CBB2173618}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Musharaf.Portal.Core.Blazor.Tests.Unit", "Musharaf.Portal.Core.Blazor.Tests.Unit\Musharaf.Portal.Core.Blazor.Tests.Unit.csproj", "{1397BBA0-E2BF-4641-AEF0-538C35A8E7C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Musharaf.Portal.Core.Blazor.Tests.Unit", "Musharaf.Portal.Core.Blazor.Tests.Unit\Musharaf.Portal.Core.Blazor.Tests.Unit.csproj", "{1397BBA0-E2BF-4641-AEF0-538C35A8E7C2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

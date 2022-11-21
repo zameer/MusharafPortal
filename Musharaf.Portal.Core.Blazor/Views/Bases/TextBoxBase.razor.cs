@@ -2,7 +2,7 @@
 
 namespace Musharaf.Portal.Core.Blazor.Views.Bases
 {
-    public partial class TextBoxBase
+    public partial class TextBoxBase : ComponentBase
     {
         [Parameter]
         public string Value { get; set; }
