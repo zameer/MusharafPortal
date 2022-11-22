@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Musharaf.Portal.Core.Blazor.Models.ContainerComponents;
 using Musharaf.Portal.Core.Blazor.Models.TenantCreateComponents.Exceptions;
+using Musharaf.Portal.Core.Blazor.Models.Tenants.Exceptions;
 using Musharaf.Portal.Core.Blazor.Models.TenantViews;
+using Musharaf.Portal.Core.Blazor.Models.TenantViews.Exceptions;
 using Musharaf.Portal.Core.Blazor.Services.Foundations.TenantViews;
 using Musharaf.Portal.Core.Blazor.Views.Bases;
 
@@ -27,8 +29,18 @@ namespace Musharaf.Portal.Core.Blazor.Views.Components
             this.State = ComponentState.Content;
         }
 
-        public async void CreateTenantAsync() =>
-            await this.TenantViewService.AddTenantViewAsync(this.TenantView);
+        public async void CreateTenantAsync()
+        {
+            try
+            {
+                await this.TenantViewService.AddTenantViewAsync(this.TenantView);
+            }
+            catch (TenantViewValidationException tenantViewValidationException)
+            {
+                var validationMessage = tenantViewValidationException.InnerException.Message;
+                this.ErrorLabel.SetValue(validationMessage);
+            }
+        }
     }
 }
 

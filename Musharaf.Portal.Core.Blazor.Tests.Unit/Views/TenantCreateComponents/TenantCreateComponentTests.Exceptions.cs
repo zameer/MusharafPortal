@@ -31,7 +31,7 @@ namespace Musharaf.Portal.Core.Blazor.Tests.Unit.Views.TenantCreateComponents
             this.renderedTenantCreateComponent.Instance.SubmitButton.Click();
 
             // then
-            this.renderedTenantCreateComponent.Instance.ErrorLabel
+            this.renderedTenantCreateComponent.Instance.ErrorLabel.Value
                 .Should().BeEquivalentTo(expectedErrorMessage);
 
             this.tenantViewServiceMock.Verify(service =>
