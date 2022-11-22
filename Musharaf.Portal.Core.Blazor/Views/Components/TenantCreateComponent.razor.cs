@@ -19,6 +19,7 @@ namespace Musharaf.Portal.Core.Blazor.Views.Components
         public TextBoxBase DescriptionTextBox { get; set; }
         public DropDownBase<TenantTypeView> TenantTypeDropDown { get; set; }
         public ButtonBase SubmitButton { get; set; }
+        public LabelBase ErrorLabel { get; set; }
 
         protected override void OnInitialized()
         {

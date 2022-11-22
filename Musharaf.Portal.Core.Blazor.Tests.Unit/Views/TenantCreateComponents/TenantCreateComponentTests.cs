@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Moq;
 using Musharaf.Portal.Core.Blazor.Services.Foundations.TenantViews;
 using Musharaf.Portal.Core.Blazor.Views.Components;
+using Tynamix.ObjectFiller;
 
 namespace Musharaf.Portal.Core.Blazor.Tests.Unit.Views.TenantCreateComponents
 {
@@ -19,5 +20,7 @@ namespace Musharaf.Portal.Core.Blazor.Tests.Unit.Views.TenantCreateComponents
             //this.Services.AddOptions();
             //this.JSInterop.Mode = JSRuntimeMode.Loose;
         }
+
+        private static string GetRandomString() => new MnemonicString().GetValue();
     }
 }
