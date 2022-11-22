@@ -1,4 +1,6 @@
-﻿namespace Musharaf.Portal.Core.Blazor.Models.TenantViews.Exceptions
+﻿using Xeptions;
+
+namespace Musharaf.Portal.Core.Blazor.Models.TenantViews.Exceptions
 {
     public class TenantViewValidationException : Exception
     {
