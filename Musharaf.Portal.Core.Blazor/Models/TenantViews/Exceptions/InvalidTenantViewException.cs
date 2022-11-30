@@ -2,7 +2,7 @@
 
 namespace Musharaf.Portal.Core.Blazor.Models.TenantViews.Exceptions
 {
-    public class InvalidTenantViewException : Xeption
+    public class InvalidTenantViewException : Exception
     {
         public InvalidTenantViewException(string parameterName, string parameterValue)
             : base("Invalid tenant view error occured. " +

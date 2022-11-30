@@ -1,4 +1,6 @@
-﻿namespace Musharaf.Portal.Core.Api.Models.Tenants
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Musharaf.Portal.Core.Api.Models.Tenants
 {
     public class Tenant : IAuditable
     {
@@ -9,5 +11,7 @@
         public DateTimeOffset UpdatedDate { get; set; }
         public Guid CreatedBy { get; set; }
         public Guid UpdatedBy { get; set; }
-    }
+        [NotMapped]
+        public string SearchText { get { return $"{Name} {Description}"; } }
+}
 }

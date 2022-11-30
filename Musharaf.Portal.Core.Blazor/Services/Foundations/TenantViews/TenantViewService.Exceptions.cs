@@ -1,4 +1,5 @@
-﻿using Musharaf.Portal.Core.Blazor.Models.TenantViews;
+﻿using Musharaf.Portal.Core.Blazor.Models.Tenants.Exceptions;
+using Musharaf.Portal.Core.Blazor.Models.TenantViews;
 using Musharaf.Portal.Core.Blazor.Models.TenantViews.Exceptions;
 
 namespace Musharaf.Portal.Core.Blazor.Services.Foundations.TenantViews
@@ -21,11 +22,15 @@ namespace Musharaf.Portal.Core.Blazor.Services.Foundations.TenantViews
             {
                 throw CreateAndLogValidationException(invalidTenantViewException);
             }
+            catch (TenantValidationException studentValidationException)
+            {
+                throw CreateAndLogValidationException(studentValidationException);
+            }
         }
 
         private TenantViewValidationException CreateAndLogValidationException(Exception exception)
         {
-            var tenantViewValidationException = new TenantViewValidationException(exception);
+            var tenantViewValidationException = new TenantViewValidationException(exception.InnerException);
             this.loggingBroker.LogError(tenantViewValidationException);
 
             return tenantViewValidationException;

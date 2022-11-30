@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OData.Query;
 using Musharaf.Portal.Core.Api.Models.Tenants;
 using Musharaf.Portal.Core.Api.Models.Tenants.Exceptions;
 using Musharaf.Portal.Core.Api.Services.Foundations.Tenants;
+using RESTFulLinq;
+using RESTFulLinq.Models;
 using RESTFulSense.Controllers;
 
 namespace Musharaf.Portal.Core.Api.Controllers
@@ -15,6 +18,29 @@ namespace Musharaf.Portal.Core.Api.Controllers
         public TenantsController(ITenantService tenantService)
         {
             this.tenantService = tenantService;
+        }
+
+        [HttpGet("linQuery")]
+        public async ValueTask<ActionResult<IQueryable<Tenant>>> GetAllTenantAsync(string linQuery)
+        {
+            try
+            {
+                IQueryable<Tenant> allTenants = this.tenantService.RetrieveAllTenants();
+
+                var results = await RESTFulLinqService.RunQueryAsync(
+                    linQuery,
+                    new Gloabals<Tenant> { DataSource = allTenants });
+
+                return Ok(results);
+            }
+            catch (TenantDependencyException tenantDependencyException)
+            {
+                return Problem(tenantDependencyException.Message);
+            }
+            catch (TenantServiceException tenantServiceException)
+            {
+                return Problem(tenantServiceException.Message);
+            }
         }
 
         [HttpPost]
@@ -47,6 +73,7 @@ namespace Musharaf.Portal.Core.Api.Controllers
         }
 
         [HttpGet]
+        [EnableQuery]
         public ActionResult<IQueryable<Tenant>> GetAllTenants()
         {
             try
@@ -167,5 +194,10 @@ namespace Musharaf.Portal.Core.Api.Controllers
 
         private static string GetInnerMessage(Exception exception) =>
             exception.InnerException.Message;
+
+        public class Gloabals<T> : IGlobals<T>
+        {
+            public IEnumerable<T> DataSource { get; set; }
+        }
     }
 }
