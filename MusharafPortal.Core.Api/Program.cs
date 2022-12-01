@@ -19,7 +19,11 @@ builder.Services.AddTransient<IStorageBroker, StorageBroker>();
 builder.Services.AddTransient<ITenantService, TenantService>();
 
 builder.Services.AddControllers().AddOData(options => 
-    options.Select().Filter().OrderBy().SetMaxTop(null).Count());
+    options.Select()
+        .Filter()
+        .OrderBy()
+        .SetMaxTop(null)
+        .Count());
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

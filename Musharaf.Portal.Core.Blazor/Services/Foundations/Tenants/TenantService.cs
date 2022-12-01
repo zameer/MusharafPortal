@@ -23,5 +23,11 @@ namespace Musharaf.Portal.Core.Blazor.Services.Foundations.Tenants
             ValidateTenantOnCreate(tenant);
             return await this.apiBroker.PostTenantAsync(tenant);
         });
+
+        public ValueTask<List<Tenant>> RetrieveAllTenantAsync() =>
+        TryCatch(async () =>
+        {
+            return await this.apiBroker.GetAllTenantsAsync();
+        });
     }
 }

@@ -1,25 +1,32 @@
 ﻿@using Musharaf.Portal.Core.Blazor.Models.TenantViews;
 @using Musharaf.Portal.Core.Blazor.Views.Components.ContainerComponents
-<ContainerComponent 
-    State="State">
+<ContainerComponent State="State">
     <Content>
-        <TextBoxBase @ref=NameTextBox
-                     Placeholder="Name"
-                     @bind-Value=@TenantView.Name />
-        <br />
-        <TextBoxBase @ref=DescriptionTextBox
-                     Placeholder="Description"
-                     @bind-Value=@TenantView.Description />
-        <br />
+        <MudGrid>
+            <MudItem xs="12" sm="7">
+                <MudPaper Class="pa-4">
+                    <MudForm>
 
-        <DropDownBase @ref=@TenantTypeDropDown
-                      TEnum="TenantTypeView" />
-        <br />
+                        <TextBoxBase @ref=NameTextBox
+                                     Placeholder="Name"
+                                     @bind-Value=@TenantView.Name />
 
-        <ButtonBase @ref=SubmitButton
-                    Label="Submit Tenant"
-                    OnClick="@CreateTenantAsync" />
-
+                        <TextBoxBase @ref=DescriptionTextBox
+                                     Placeholder="Description"
+                                     @bind-Value=@TenantView.Description />
+                        <div class="d-flex">
+                            <DropDownBase @ref=@TenantTypeDropDown
+                                          TEnum="TenantTypeView" />
+                        </div>
+                    </MudForm>
+                </MudPaper>
+                <MudPaper Class="pa-4 mt-4">
+                    <ButtonBase @ref=SubmitButton
+                                Label="Submit Tenant"
+                                OnClick="@CreateTenantAsync" />
+                </MudPaper>
+            </MudItem>
+        </MudGrid>
         <LabelBase @ref=ErrorLabel />
     </Content>
 </ContainerComponent>

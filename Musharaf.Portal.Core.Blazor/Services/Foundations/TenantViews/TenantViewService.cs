@@ -36,6 +36,15 @@ namespace Musharaf.Portal.Core.Blazor.Services.Foundations.TenantViews
                 return tenantView;
             });
 
+        public ValueTask<List<TenantView>> RetrieveAllTenantViewsAsync() =>
+       TryCatch(async () =>
+       {
+           List<Tenant> students =
+               await this.tenantService.RetrieveAllTenantAsync();
+
+           return students.Select(AsTenantView).ToList();
+       });
+
         private Tenant MapToTenant(TenantView tenantView)
         {
             Guid currentLoggedInUserId = this.userService.GetCurrentlyLoggedInUser();
@@ -52,5 +61,11 @@ namespace Musharaf.Portal.Core.Blazor.Services.Foundations.TenantViews
                 UpdatedDate = currentDateTime
             };
         }
+        private static Func<Tenant, TenantView> AsTenantView =>
+           student => new TenantView
+           {
+               Name = student.Name,
+               Description = student.Description
+           };
     }
 }

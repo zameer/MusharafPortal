@@ -7,6 +7,7 @@ namespace Musharaf.Portal.Core.Blazor.Services.Foundations.Tenants
     public partial class TenantService
     {
         private delegate ValueTask<Tenant> ReturningTenantFunction();
+        private delegate ValueTask<List<Tenant>> ReturningTenantsFunction();
 
         private async ValueTask<Tenant> TryCatch(ReturningTenantFunction returningTenantFunction)
         {
@@ -49,6 +50,43 @@ namespace Musharaf.Portal.Core.Blazor.Services.Foundations.Tenants
             catch(Exception exception)
             {
                 throw CreateAndLogServiceException(exception);
+            }
+        }
+
+
+        private async ValueTask<List<Tenant>> TryCatch(ReturningTenantsFunction returningTenantsFunction)
+        {
+            try
+            {
+                return await returningTenantsFunction();
+            }
+            catch (HttpRequestException httpRequestException)
+            {
+                var failedTenantDependencyException =
+                    new FailedTenantDependencyException(httpRequestException);
+
+                throw CreateAndLogCriticalDependencyException(failedTenantDependencyException);
+            }
+            catch (HttpResponseUrlNotFoundException httpResponseUrlNotFoundException)
+            {
+                var failedTenantDependencyException =
+                    new FailedTenantDependencyException(httpResponseUrlNotFoundException);
+
+                throw CreateAndLogCriticalDependencyException(failedTenantDependencyException);
+            }
+            catch (HttpResponseUnauthorizedException httpResponseUnauthorizedException)
+            {
+                var failedTenantDependencyException =
+                    new FailedTenantDependencyException(httpResponseUnauthorizedException);
+
+                throw CreateAndLogCriticalDependencyException(failedTenantDependencyException);
+            }
+            catch (HttpResponseException httpResponseException)
+            {
+                var failedTenantDependencyException =
+                    new FailedTenantDependencyException(httpResponseException);
+
+                throw CreateAndLogDependencyException(failedTenantDependencyException);
             }
         }
 

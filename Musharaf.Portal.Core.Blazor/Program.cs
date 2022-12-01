@@ -1,3 +1,4 @@
+using MudBlazor.Services;
 using Musharaf.Portal.Core.Blazor.Brokers.Apis;
 using Musharaf.Portal.Core.Blazor.Brokers.DateTimes;
 using Musharaf.Portal.Core.Blazor.Brokers.Loggings;
@@ -10,7 +11,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddHttpClient();
+builder.Services.AddHttpClient(); 
+builder.Services.AddMudServices();
 
 builder.Services.AddScoped<ILogger, Logger<ILoggingBroker>>();
 builder.Services.AddScoped<ILoggingBroker, LoggingBroker>();

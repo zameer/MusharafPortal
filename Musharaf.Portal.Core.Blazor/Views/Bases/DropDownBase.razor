@@ -1,10 +1,10 @@
 ﻿@typeparam TEnum
 
-<select>
+<MudSelect T="TEnum">
     @{
         foreach (TEnum enumValue in Enum.GetValues(typeof(TEnum)))
         {
-            <option>@enumValue</option>
+            <MudSelectItem T="TEnum">@enumValue</MudSelectItem>
         }
     }
-</select>
+</MudSelect>

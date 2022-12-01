@@ -5,5 +5,6 @@ namespace Musharaf.Portal.Core.Blazor.Brokers.Apis
     public partial interface IApiBroker
     {
         ValueTask<Tenant> PostTenantAsync(Tenant tenant);
+        ValueTask<List<Tenant>> GetAllTenantsAsync();
     }
 }

@@ -1,0 +1,41 @@
+﻿@using Musharaf.Portal.Core.Blazor.Models.TenantViews;
+@using Musharaf.Portal.Core.Blazor.Views.Components.ContainerComponents
+
+<ContainerComponent State="State">
+    <Content>
+        <MudGrid>
+            <MudItem xs="2"></MudItem>
+            <MudItem xs="8" sm="7">
+                <div />
+                <MudPaper Class="pa-4">
+                    <MudTable ServerData="@(new Func<TableState, Task<TableData<TenantView>>>(ServerReload))"
+                              Dense="true" Hover="true" @ref="Table">
+                        <ToolBarContent>
+                            <MudText Typo="Typo.h6">Tenant List</MudText>
+                            <MudSpacer />
+                            <MudTextField T="string" ValueChanged="@(s=>OnSearch(s))" Placeholder="Search" Adornment="Adornment.Start"
+                                          AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+                        </ToolBarContent>
+                        <HeaderContent>
+                            <MudTh><MudTableSortLabel SortLabel="mn_field" T="TenantView">Name</MudTableSortLabel></MudTh>
+                            <MudTh><MudTableSortLabel SortLabel="desc_field" T="TenantView">Description</MudTableSortLabel></MudTh>
+                        </HeaderContent>
+                        <RowTemplate>
+                            <MudTd DataLabel="Name">@context.Name</MudTd>
+                            <MudTd DataLabel="Description">@context.Description</MudTd>
+                        </RowTemplate>
+                        <NoRecordsContent>
+                            <MudText>No matching records found</MudText>
+                        </NoRecordsContent>
+                        <LoadingContent>
+                            <MudText>Loading...</MudText>
+                        </LoadingContent>
+                        <PagerContent>
+                            <MudTablePager />
+                        </PagerContent>
+                    </MudTable>
+                </MudPaper>
+            </MudItem>
+        </MudGrid>
+    </Content>
+</ContainerComponent>
