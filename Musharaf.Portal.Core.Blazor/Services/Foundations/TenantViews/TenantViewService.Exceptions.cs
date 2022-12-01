@@ -9,6 +9,7 @@ namespace Musharaf.Portal.Core.Blazor.Services.Foundations.TenantViews
     {
         private delegate ValueTask<TenantView> ReturningTenantViewFunction();
         private delegate ValueTask<List<TenantView>> ReturningTenantViewsFunction();
+        private delegate ValueTask<int> ReturningTenantViewsCountFunction();
 
         private async ValueTask<TenantView> TryCatch(ReturningTenantViewFunction returningTenantViewFunction)
         {
@@ -52,6 +53,25 @@ namespace Musharaf.Portal.Core.Blazor.Services.Foundations.TenantViews
             }
         }
 
+        private async ValueTask<int> TryCatch(ReturningTenantViewsCountFunction returningTenantViewsCountFunction)
+        {
+            try
+            {
+                return await returningTenantViewsCountFunction();
+            }
+            catch (NullTenantViewException nullTenantViewException)
+            {
+                throw CreateAndLogValidationException(nullTenantViewException);
+            }
+            catch (InvalidTenantViewException invalidTenantViewException)
+            {
+                throw CreateAndLogValidationException(invalidTenantViewException);
+            }
+            catch (TenantValidationException studentValidationException)
+            {
+                throw CreateAndLogValidationException(studentValidationException);
+            }
+        }
         private TenantViewDependencyException CreateAndLogDependencyException(Exception exception)
         {
             var tenantViewDependencyException = new TenantViewDependencyException(exception);

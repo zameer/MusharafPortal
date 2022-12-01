@@ -6,5 +6,7 @@ namespace Musharaf.Portal.Core.Blazor.Services.Foundations.Tenants
     {
         ValueTask<Tenant> CreateTenantAsync(Tenant tenant);
         ValueTask<List<Tenant>> RetrieveAllTenantAsync();
+        ValueTask<List<Tenant>> RetrieveAllTenantAsync(string query);
+        ValueTask<int> RetrieveAllTenantCountAsync();
     }
 }

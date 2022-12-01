@@ -39,10 +39,25 @@ namespace Musharaf.Portal.Core.Blazor.Services.Foundations.TenantViews
         public ValueTask<List<TenantView>> RetrieveAllTenantViewsAsync() =>
        TryCatch(async () =>
        {
-           List<Tenant> students =
+           List<Tenant> tenants =
                await this.tenantService.RetrieveAllTenantAsync();
 
-           return students.Select(AsTenantView).ToList();
+           return tenants.Select(AsTenantView).ToList();
+       });
+
+        public ValueTask<List<TenantView>> RetrieveAllTenantViewsAsync(string query) =>
+       TryCatch(async () =>
+       {
+           List<Tenant> tenants =
+               await this.tenantService.RetrieveAllTenantAsync(query);
+
+           return tenants.Select(AsTenantView).ToList();
+       });
+
+        public ValueTask<int> RetrieveAllTenantViewsCountAsync() =>
+       TryCatch(async () =>
+       {
+           return await this.tenantService.RetrieveAllTenantCountAsync();
        });
 
         private Tenant MapToTenant(TenantView tenantView)
@@ -61,6 +76,8 @@ namespace Musharaf.Portal.Core.Blazor.Services.Foundations.TenantViews
                 UpdatedDate = currentDateTime
             };
         }
+
+
         private static Func<Tenant, TenantView> AsTenantView =>
            student => new TenantView
            {

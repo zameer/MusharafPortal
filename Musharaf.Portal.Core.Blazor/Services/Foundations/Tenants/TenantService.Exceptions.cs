@@ -8,6 +8,7 @@ namespace Musharaf.Portal.Core.Blazor.Services.Foundations.Tenants
     {
         private delegate ValueTask<Tenant> ReturningTenantFunction();
         private delegate ValueTask<List<Tenant>> ReturningTenantsFunction();
+        private delegate ValueTask<int> ReturningTenantsCountFunction();
 
         private async ValueTask<Tenant> TryCatch(ReturningTenantFunction returningTenantFunction)
         {
@@ -53,7 +54,6 @@ namespace Musharaf.Portal.Core.Blazor.Services.Foundations.Tenants
             }
         }
 
-
         private async ValueTask<List<Tenant>> TryCatch(ReturningTenantsFunction returningTenantsFunction)
         {
             try
@@ -90,6 +90,41 @@ namespace Musharaf.Portal.Core.Blazor.Services.Foundations.Tenants
             }
         }
 
+        private async ValueTask<int> TryCatch(ReturningTenantsCountFunction returningTenantsCountFunction)
+        {
+            try
+            {
+                return await returningTenantsCountFunction();
+            }
+            catch (HttpRequestException httpRequestException)
+            {
+                var failedTenantDependencyException =
+                    new FailedTenantDependencyException(httpRequestException);
+
+                throw CreateAndLogCriticalDependencyException(failedTenantDependencyException);
+            }
+            catch (HttpResponseUrlNotFoundException httpResponseUrlNotFoundException)
+            {
+                var failedTenantDependencyException =
+                    new FailedTenantDependencyException(httpResponseUrlNotFoundException);
+
+                throw CreateAndLogCriticalDependencyException(failedTenantDependencyException);
+            }
+            catch (HttpResponseUnauthorizedException httpResponseUnauthorizedException)
+            {
+                var failedTenantDependencyException =
+                    new FailedTenantDependencyException(httpResponseUnauthorizedException);
+
+                throw CreateAndLogCriticalDependencyException(failedTenantDependencyException);
+            }
+            catch (HttpResponseException httpResponseException)
+            {
+                var failedTenantDependencyException =
+                    new FailedTenantDependencyException(httpResponseException);
+
+                throw CreateAndLogDependencyException(failedTenantDependencyException);
+            }
+        }
         private TenantValidationException CreateAndLogValidationException(Exception exception)
         {
             var tenantValidationException = new TenantValidationException(exception);

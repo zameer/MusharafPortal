@@ -20,29 +20,6 @@ namespace Musharaf.Portal.Core.Api.Controllers
             this.tenantService = tenantService;
         }
 
-        [HttpGet("linQuery")]
-        public async ValueTask<ActionResult<IQueryable<Tenant>>> GetAllTenantAsync(string linQuery)
-        {
-            try
-            {
-                IQueryable<Tenant> allTenants = this.tenantService.RetrieveAllTenants();
-
-                var results = await RESTFulLinqService.RunQueryAsync(
-                    linQuery,
-                    new Gloabals<Tenant> { DataSource = allTenants });
-
-                return Ok(results);
-            }
-            catch (TenantDependencyException tenantDependencyException)
-            {
-                return Problem(tenantDependencyException.Message);
-            }
-            catch (TenantServiceException tenantServiceException)
-            {
-                return Problem(tenantServiceException.Message);
-            }
-        }
-
         [HttpPost]
         public async ValueTask<ActionResult<Tenant>> PostTenantAsync(Tenant tenant)
         {
@@ -82,6 +59,26 @@ namespace Musharaf.Portal.Core.Api.Controllers
                     this.tenantService.RetrieveAllTenants();
 
                 return Ok(storageTenants);
+            }
+            catch (TenantDependencyException tenantDependencyException)
+            {
+                return Problem(tenantDependencyException.Message);
+            }
+            catch (TenantServiceException tenantServiceException)
+            {
+                return Problem(tenantServiceException.Message);
+            }
+        }
+
+        [HttpGet("count")]
+        public ActionResult GetAllTenantsCount()
+        {
+            try
+            {
+                var storageTenantsCount =
+                    this.tenantService.RetrieveAllTenants().Count();
+
+                return Ok(storageTenantsCount);
             }
             catch (TenantDependencyException tenantDependencyException)
             {

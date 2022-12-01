@@ -10,5 +10,11 @@ namespace Musharaf.Portal.Core.Blazor.Brokers.Apis
 
         public async ValueTask<List<Tenant>> GetAllTenantsAsync() =>
             await this.GetAsync<List<Tenant>>(RelativeUrl);
+
+        public async ValueTask<List<Tenant>> GetAllTenantsAsync(string query) =>
+            await this.GetAsync<List<Tenant>>($"{RelativeUrl}{query}");
+
+        public async ValueTask<int> GetAllTenantsCountAsync() =>
+            await this.GetAsync<int>($"{RelativeUrl}/count");
     }
 }
