@@ -79,10 +79,12 @@ namespace Musharaf.Portal.Core.Blazor.Services.Foundations.TenantViews
 
 
         private static Func<Tenant, TenantView> AsTenantView =>
-           student => new TenantView
+           tenant => new TenantView
            {
-               Name = student.Name,
-               Description = student.Description
+               Name = tenant.Name,
+               Description = tenant.Description,
+               CreatedDate= tenant.CreatedDate,
+               UpdatedDate = tenant.UpdatedDate
            };
     }
 }

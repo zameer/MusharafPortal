@@ -12,11 +12,8 @@ namespace Musharaf.Portal.Core.Blazor.Views.Components
         public ITenantViewService TenantViewService { get; set; }
 
         public ComponentState State { get; set; }
-        public TenantView TenantView { get; set; }
-        public List<TenantView> TenantViews { get; set; }
-        private IEnumerable<TenantView> PagedData { get; set; }
+
         private MudTable<TenantView> Table { get; set; }
-        private int TotalItems { get; set; }
         private string SearchString { get; set; }
 
         private string[] SearchColumns;
@@ -26,10 +23,13 @@ namespace Musharaf.Portal.Core.Blazor.Views.Components
         protected override void OnInitialized()
         {
             this.State = ComponentState.Content;
+
             this.SearchColumns = new[] { "name", "description" };
             this.SortLabelsAndColumns = new (string sortLabel, string sortColumn)[] {
                 (sortLabel: "name_field", sortColumn: nameof(TenantView.Name)),
-                (sortLabel: "desc_field", sortColumn: nameof(TenantView.Description))
+                (sortLabel: "desc_field", sortColumn: nameof(TenantView.Description)),
+                (sortLabel: "dtCreated_field", sortColumn: nameof(TenantView.CreatedDate)),
+                (sortLabel: "dtUpdated_field", sortColumn: nameof(TenantView.UpdatedDate))
             };
         }
 
@@ -42,12 +42,12 @@ namespace Musharaf.Portal.Core.Blazor.Views.Components
                     .OrderBy(state, this.SortLabelsAndColumns)
                     .AsODataQuery();
 
-            PagedData = await this.TenantViewService
+            IEnumerable<TenantView> pagedData = await this.TenantViewService
                 .RetrieveAllTenantViewsAsync(mudODataQuery);
 
-            TotalItems = await this.TenantViewService.RetrieveAllTenantViewsCountAsync();
+            var totalItems = await this.TenantViewService.RetrieveAllTenantViewsCountAsync();
 
-            return new TableData<TenantView>() { TotalItems = TotalItems, Items = PagedData };
+            return new TableData<TenantView>() { TotalItems = totalItems, Items = pagedData };
         }
 
         private void OnSearch(string text)

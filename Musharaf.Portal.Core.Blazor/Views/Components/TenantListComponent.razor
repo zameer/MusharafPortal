@@ -19,10 +19,14 @@
                         <HeaderContent>
                             <MudTh><MudTableSortLabel SortLabel="name_field" T="TenantView">Name</MudTableSortLabel></MudTh>
                             <MudTh><MudTableSortLabel SortLabel="desc_field" T="TenantView">Description</MudTableSortLabel></MudTh>
+                            <MudTh><MudTableSortLabel SortLabel="dtCreated_field" T="TenantView">Created On</MudTableSortLabel></MudTh>
+                            <MudTh><MudTableSortLabel SortLabel="dtUpdated_field" T="TenantView">Updated On</MudTableSortLabel></MudTh>
                         </HeaderContent>
                         <RowTemplate>
                             <MudTd DataLabel="Name">@context.Name</MudTd>
                             <MudTd DataLabel="Description">@context.Description</MudTd>
+                            <MudTd DataLabel="Created On">@context.CreatedDate</MudTd>
+                            <MudTd DataLabel="Updated On">@context.UpdatedDate</MudTd>
                         </RowTemplate>
                         <NoRecordsContent>
                             <MudText>No matching records found</MudText>

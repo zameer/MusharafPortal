@@ -11,7 +11,5 @@ namespace Musharaf.Portal.Core.Api.Models.Tenants
         public DateTimeOffset UpdatedDate { get; set; }
         public Guid CreatedBy { get; set; }
         public Guid UpdatedBy { get; set; }
-        [NotMapped]
-        public string SearchText { get { return $"{Name} {Description}"; } }
 }
 }
