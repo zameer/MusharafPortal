@@ -57,6 +57,20 @@ namespace Musharaf.Portal.Core.Blazor.Views.Components
             return this;
         }
 
+        public MudODataQueryBuilder Select(string[] selectColumns)
+        {
+            var selectQuery = string.Empty;
+            foreach (var selectColumn in selectColumns)
+            {
+                selectQuery = string.IsNullOrEmpty(selectQuery)
+                    ? $"$select={selectColumn}"
+                    : $"{selectQuery},{selectColumn}";
+            }
+            ODataQueryList.Add(selectQuery);
+
+            return this;
+        }
+
         public string AsODataQuery() =>
             $"?{String.Join('&', ODataQueryList.ToArray())}";
 

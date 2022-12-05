@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using Musharaf.Portal.Core.Blazor.Models.ContainerComponents;
+using Musharaf.Portal.Core.Blazor.Models.MudTables;
 using Musharaf.Portal.Core.Blazor.Models.TenantViews;
 using Musharaf.Portal.Core.Blazor.Services.Foundations.TenantViews;
+using System.Data.Common;
 
 namespace Musharaf.Portal.Core.Blazor.Views.Components
 {
@@ -13,30 +15,18 @@ namespace Musharaf.Portal.Core.Blazor.Views.Components
 
         public ComponentState State { get; set; }
 
-        private MudTable<TenantView> Table { get; set; }
-        private string SearchString { get; set; }
-
-        private string[] SearchColumns;
-
-        private (string sortLabel, string sortColumn)[] SortLabelsAndColumns;
-
         protected override void OnInitialized()
         {
             this.State = ComponentState.Content;
 
-            this.SearchColumns = new[] { "name", "description" };
-            this.SortLabelsAndColumns = new (string sortLabel, string sortColumn)[] {
-                (sortLabel: "name_field", sortColumn: nameof(TenantView.Name)),
-                (sortLabel: "desc_field", sortColumn: nameof(TenantView.Description)),
-                (sortLabel: "dtCreated_field", sortColumn: nameof(TenantView.CreatedDate)),
-                (sortLabel: "dtUpdated_field", sortColumn: nameof(TenantView.UpdatedDate))
-            };
+            InitializeMudTable();
         }
 
         private async Task<TableData<TenantView>> ServerReload(TableState state)
         {
             var mudODataQuery = MudODataQuery
                     .Build()
+                    .Select(options.Select(e => e.Name).ToArray())
                     .Search(SearchColumns, this.SearchString)
                     .SkipTake(state.Page, state.PageSize)
                     .OrderBy(state, this.SortLabelsAndColumns)
@@ -53,6 +43,18 @@ namespace Musharaf.Portal.Core.Blazor.Views.Components
         private void OnSearch(string text)
         {
             SearchString = text;
+            this.Table.ReloadServerData();
+        }
+        private void Edit(string id)
+        {
+        }
+
+        private void Delete(string id)
+        {
+            snackBar.Add("Customer Deleted.", Severity.Success);
+        }
+        private void Refresh()
+        {
             this.Table.ReloadServerData();
         }
     }

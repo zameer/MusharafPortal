@@ -1,12 +1,18 @@
-﻿@using Musharaf.Portal.Core.Blazor.Models.TenantViews;
+﻿@using Musharaf.Portal.Core.Blazor.Models.MudTables;
+@using Musharaf.Portal.Core.Blazor.Models.TenantViews;
 @using Musharaf.Portal.Core.Blazor.Views.Components.ContainerComponents
+@inject MudBlazor.ISnackbar snackBar
 
 <ContainerComponent State="State">
     <Content>
         <MudGrid>
-            <MudItem xs="2"></MudItem>
-            <MudItem xs="8" sm="7">
-                <div />
+            <MudItem xs="12">
+                <MudCard Elevation="25">
+                    <MudCardContent style="text-align: right;">
+                        <MudButton Variant="Variant.Filled" Color="Color.Success">New Tenant</MudButton>
+                    </MudCardContent>
+                </MudCard>
+                <br />
                 <MudPaper Class="pa-4">
                     <MudTable ServerData="@(new Func<TableState, Task<TableData<TenantView>>>(ServerReload))"
                               Dense="true" Hover="true" @ref="Table">
@@ -15,18 +21,37 @@
                             <MudSpacer />
                             <MudTextField T="string" ValueChanged="@(s=>OnSearch(s))" Placeholder="Search" Adornment="Adornment.Start"
                                           AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+                            <MudSpacer />
+                            <MudSelect T="TableColumn" Label="Select Columns" MultiSelection="true" @bind-Value="Value" @bind-SelectedValues="options">
+                                @foreach (var column in allColumns)
+                                {
+                                    <MudSelectItem T="TableColumn" Value="@column">@column.DisplayName</MudSelectItem>
+                                }
+                            </MudSelect>
+                            <MudIconButton 
+                                @onclick="@(()=>Refresh())"
+                                Icon="@Icons.Filled.Refresh" 
+                                Color="Color.Primary" 
+                                ria-label="Load"></MudIconButton>
                         </ToolBarContent>
                         <HeaderContent>
-                            <MudTh><MudTableSortLabel SortLabel="name_field" T="TenantView">Name</MudTableSortLabel></MudTh>
-                            <MudTh><MudTableSortLabel SortLabel="desc_field" T="TenantView">Description</MudTableSortLabel></MudTh>
-                            <MudTh><MudTableSortLabel SortLabel="dtCreated_field" T="TenantView">Created On</MudTableSortLabel></MudTh>
-                            <MudTh><MudTableSortLabel SortLabel="dtUpdated_field" T="TenantView">Updated On</MudTableSortLabel></MudTh>
+                            @foreach (var column in options)
+                            {
+                                <MudTh><MudTableSortLabel SortLabel="@column.SortLabel" T="TenantView">@column.DisplayName</MudTableSortLabel></MudTh>
+                            }
+                            <MudTh></MudTh>
                         </HeaderContent>
                         <RowTemplate>
-                            <MudTd DataLabel="Name">@context.Name</MudTd>
-                            <MudTd DataLabel="Description">@context.Description</MudTd>
-                            <MudTd DataLabel="Created On">@context.CreatedDate</MudTd>
-                            <MudTd DataLabel="Updated On">@context.UpdatedDate</MudTd>
+                            @foreach (var column in options)
+                            {
+                                <MudTd DataLabel="@column.DisplayName">
+                                    @context.GetType().GetProperty(column.Name).GetValue(@context, null)
+                                </MudTd>
+                            }
+                            <MudTd DataLabel="">
+                                <MudFab @onclick="@(()=>Edit(@context.Name))" Color="Color.Primary" Icon="@Icons.Material.Filled.Edit" Size="Size.Small" IconSize="Size.Small" />
+                                <MudFab @onclick="@(()=>Delete(@context.Name))" Color="Color.Secondary" Icon="@Icons.Material.Filled.Delete" Size="Size.Small" IconSize="Size.Small" />
+                            </MudTd>
                         </RowTemplate>
                         <NoRecordsContent>
                             <MudText>No matching records found</MudText>
