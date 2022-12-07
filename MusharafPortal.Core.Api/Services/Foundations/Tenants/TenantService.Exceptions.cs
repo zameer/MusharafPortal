@@ -1,6 +1,7 @@
 ﻿using Musharaf.Portal.Core.Api.Models.Tenants;
 using Musharaf.Portal.Core.Api.Models.Tenants.Exceptions;
 using System.Data.SqlClient;
+using Xeptions;
 
 namespace Musharaf.Portal.Core.Api.Services.Foundations.Tenants
 {
@@ -57,7 +58,7 @@ namespace Musharaf.Portal.Core.Api.Services.Foundations.Tenants
             return tenantServiceException;
         }
 
-        private TenantValidationException CreateAndLogValidationException(Exception exception)
+        private TenantValidationException CreateAndLogValidationException(Xeption exception)
         {
             var tenantValidationException = new TenantValidationException(exception);
             this.loggingBroker.LogError(tenantValidationException);

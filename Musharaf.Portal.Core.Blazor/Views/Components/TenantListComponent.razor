@@ -1,4 +1,6 @@
-﻿@using Musharaf.Portal.Core.Blazor.Models.MudTables;
+﻿@page "/tenants"
+
+@using Musharaf.Portal.Core.Blazor.Models.MudTables;
 @using Musharaf.Portal.Core.Blazor.Models.TenantViews;
 @using Musharaf.Portal.Core.Blazor.Views.Components.ContainerComponents
 @inject MudBlazor.ISnackbar snackBar
@@ -9,7 +11,7 @@
             <MudItem xs="12">
                 <MudCard Elevation="25">
                     <MudCardContent style="text-align: right;">
-                        <MudButton Variant="Variant.Filled" Color="Color.Success">New Tenant</MudButton>
+                        <MudButton @onclick="OpenDialog" Variant="Variant.Filled" Color="Color.Success">New Tenant</MudButton>
                     </MudCardContent>
                 </MudCard>
                 <br />
@@ -35,14 +37,14 @@
                                 ria-label="Load"></MudIconButton>
                         </ToolBarContent>
                         <HeaderContent>
-                            @foreach (var column in options)
+                            @foreach (var column in selectedOptions)
                             {
                                 <MudTh><MudTableSortLabel SortLabel="@column.SortLabel" T="TenantView">@column.DisplayName</MudTableSortLabel></MudTh>
                             }
                             <MudTh></MudTh>
                         </HeaderContent>
                         <RowTemplate>
-                            @foreach (var column in options)
+                            @foreach (var column in selectedOptions)
                             {
                                 <MudTd DataLabel="@column.DisplayName">
                                     @context.GetType().GetProperty(column.Name).GetValue(@context, null)

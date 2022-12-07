@@ -26,11 +26,11 @@ namespace Musharaf.Portal.Core.Api.Tests.Unit.Services.Foundations.Tenants
             await Assert.ThrowsAsync<TenantValidationException>(() =>
                 createTenantTask.AsTask());
 
-            this.storageBrokerMock.Verify(broker =>
-                broker.InsertTenantAsync(It.IsAny<Tenant>()),
-                Times.Never
-            );
+            this.loggingBrokerMock.Verify(broker =>
+                broker.LogError(It.Is(SameValidationExceptionAs(expectedNullTenantValidationException))), 
+                Times.Once);
 
+            this.loggingBrokerMock.VerifyNoOtherCalls();
             this.storageBrokerMock.VerifyNoOtherCalls();
         }
     }

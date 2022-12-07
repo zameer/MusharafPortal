@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using MudBlazor;
 using Musharaf.Portal.Core.Blazor.Models.ContainerComponents;
 using Musharaf.Portal.Core.Blazor.Models.TenantCreateComponents.Exceptions;
 using Musharaf.Portal.Core.Blazor.Models.Tenants.Exceptions;
@@ -11,6 +12,9 @@ namespace Musharaf.Portal.Core.Blazor.Views.Components
 {
     public partial class TenantCreateComponent : ComponentBase
     {
+        [CascadingParameter] 
+        MudDialogInstance MudDialog { get; set; }
+
         [Inject]
         public ITenantViewService TenantViewService { get; set; }
 
@@ -41,6 +45,8 @@ namespace Musharaf.Portal.Core.Blazor.Views.Components
                 this.ErrorLabel.SetValue(validationMessage);
             }
         }
+
+        void Cancel() => MudDialog.Cancel();
     }
 }
 

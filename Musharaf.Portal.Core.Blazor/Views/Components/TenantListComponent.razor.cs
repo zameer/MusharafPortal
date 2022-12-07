@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Force.DeepCloner;
+using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using Musharaf.Portal.Core.Blazor.Models.ContainerComponents;
 using Musharaf.Portal.Core.Blazor.Models.MudTables;
@@ -12,6 +13,8 @@ namespace Musharaf.Portal.Core.Blazor.Views.Components
     {
         [Inject]
         public ITenantViewService TenantViewService { get; set; }
+        [Inject] 
+        IDialogService DialogService { get; set; }
 
         public ComponentState State { get; set; }
 
@@ -45,17 +48,26 @@ namespace Musharaf.Portal.Core.Blazor.Views.Components
             SearchString = text;
             this.Table.ReloadServerData();
         }
-        private void Edit(string id)
-        {
-        }
+        private void Edit(string id) =>
+            snackBar.Add("Customer Edited.", Severity.Success);
 
-        private void Delete(string id)
-        {
+        private void Delete(string id) =>
             snackBar.Add("Customer Deleted.", Severity.Success);
-        }
         private void Refresh()
         {
+            this.selectedOptions = this.options.DeepClone();
             this.Table.ReloadServerData();
+        }
+
+        private void OpenDialog()
+        {
+            var options = new DialogOptions { 
+                MaxWidth = MaxWidth.Medium, 
+                FullWidth = true, 
+                CloseOnEscapeKey = true,
+                CloseButton = true
+            };
+            DialogService.Show<TenantCreateComponent>("Create New Tenant", options);
         }
     }
 }

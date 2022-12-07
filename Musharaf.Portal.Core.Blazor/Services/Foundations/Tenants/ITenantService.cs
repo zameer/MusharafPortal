@@ -8,5 +8,7 @@ namespace Musharaf.Portal.Core.Blazor.Services.Foundations.Tenants
         ValueTask<List<Tenant>> RetrieveAllTenantAsync();
         ValueTask<List<Tenant>> RetrieveAllTenantAsync(string query);
         ValueTask<int> RetrieveAllTenantCountAsync();
+
+        ValueTask<Tenant> RemoveTenantByIdAsync(Guid Id);
     }
 }

@@ -1,32 +1,22 @@
 ﻿@using Musharaf.Portal.Core.Blazor.Models.TenantViews;
 @using Musharaf.Portal.Core.Blazor.Views.Components.ContainerComponents
-<ContainerComponent State="State">
-    <Content>
-        <MudGrid>
-            <MudItem xs="12" sm="7">
-                <MudPaper Class="pa-4">
-                    <MudForm>
 
-                        <TextBoxBase @ref=NameTextBox
-                                     Placeholder="Name"
-                                     @bind-Value=@TenantView.Name />
+<MudDialog>
+    <DialogContent>
+        <MudTextField Placeholder="Name"
+                     @bind-Value=@TenantView.Name />
 
-                        <TextBoxBase @ref=DescriptionTextBox
-                                     Placeholder="Description"
-                                     @bind-Value=@TenantView.Description />
-                        <div class="d-flex">
-                            <DropDownBase @ref=@TenantTypeDropDown
-                                          TEnum="TenantTypeView" />
-                        </div>
-                    </MudForm>
-                </MudPaper>
-                <MudPaper Class="pa-4 mt-4">
-                    <ButtonBase @ref=SubmitButton
-                                Label="Submit Tenant"
-                                OnClick="@CreateTenantAsync" />
-                </MudPaper>
-            </MudItem>
-        </MudGrid>
+        <MudTextField Placeholder="Description"
+                     @bind-Value=@TenantView.Description />
+        <div class="d-flex">
+            <DropDownBase @ref=@TenantTypeDropDown
+                          TEnum="TenantTypeView" />
+        </div>
         <LabelBase @ref=ErrorLabel />
-    </Content>
-</ContainerComponent>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+        <MudButton Color="Color.Primary" OnClick="CreateTenantAsync">Submit Tenant</MudButton>
+    </DialogActions>
+</MudDialog>
+

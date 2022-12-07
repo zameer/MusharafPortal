@@ -8,5 +8,6 @@ namespace Musharaf.Portal.Core.Blazor.Brokers.Apis
         ValueTask<List<Tenant>> GetAllTenantsAsync();
         ValueTask<List<Tenant>> GetAllTenantsAsync(string query);
         ValueTask<int> GetAllTenantsCountAsync();
+        ValueTask<Tenant> RemoveTenantByIdAsync(Guid Id);
     }
 }

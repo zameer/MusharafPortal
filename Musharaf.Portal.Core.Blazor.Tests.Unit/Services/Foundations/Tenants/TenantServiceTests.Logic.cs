@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using Force.DeepCloner;
 using Moq;
 using Musharaf.Portal.Core.Blazor.Models.Tenants;
 
@@ -35,5 +36,35 @@ namespace Musharaf.Portal.Core.Blazor.Tests.Unit.Services.Foundations.Tenants
             this.loggingBrokerMock.VerifyNoOtherCalls();
         }
 
+
+        [Fact]
+        public async Task ShouldDeleteTenantAsync()
+        {
+            // given
+            Tenant randomTenant = CreateRandomTenant();
+            Tenant storageTenant = randomTenant;
+            Tenant expectedTenant = storageTenant.DeepClone();
+
+            Guid inputTenantId = randomTenant.Id;
+
+            this.apiBrokerMock.Setup(broker =>
+                broker.RemoveTenantByIdAsync(inputTenantId))
+                .ReturnsAsync(storageTenant);
+
+            // when
+            Tenant deletedTenant =
+                await this.tenantService
+                .RemoveTenantByIdAsync(inputTenantId);
+
+            // then
+            deletedTenant.Should().BeEquivalentTo(expectedTenant);
+
+            this.apiBrokerMock.Verify(broker =>
+                broker.RemoveTenantByIdAsync(inputTenantId),
+                Times.Once);
+
+            this.apiBrokerMock.VerifyNoOtherCalls();
+            this.loggingBrokerMock.VerifyNoOtherCalls();
+        }
     }
 }

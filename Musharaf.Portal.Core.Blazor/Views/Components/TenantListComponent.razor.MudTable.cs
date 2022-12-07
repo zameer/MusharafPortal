@@ -1,4 +1,5 @@
-﻿using MudBlazor;
+﻿using Force.DeepCloner;
+using MudBlazor;
 using Musharaf.Portal.Core.Blazor.Models.MudTables;
 using Musharaf.Portal.Core.Blazor.Models.TenantViews;
 
@@ -6,16 +7,19 @@ namespace Musharaf.Portal.Core.Blazor.Views.Components
 {
     public partial class TenantListComponent
     {
+
+        private IEnumerable<TableColumn> options;
+
+        private List<TableColumn> allColumns;
+        private TableColumn Value = new TableColumn();
+
+        private IEnumerable<TableColumn> selectedOptions;
         private MudTable<TenantView> Table { get; set; }
         private string SearchString { get; set; }
 
         private string[] SearchColumns;
 
         private (string sortLabel, string sortColumn)[] SortLabelsAndColumns;
-
-        private TableColumn Value = new TableColumn();
-        private IEnumerable<TableColumn> options;
-        private List<TableColumn> allColumns;
 
         protected void InitializeMudTable()
         {
@@ -42,6 +46,7 @@ namespace Musharaf.Portal.Core.Blazor.Views.Components
                 this.allColumns[0],
                 this.allColumns[1]
             };
+            this.selectedOptions = this.options.DeepClone();
         }
     }
 }

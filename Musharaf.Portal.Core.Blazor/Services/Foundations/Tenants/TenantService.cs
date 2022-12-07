@@ -24,6 +24,11 @@ namespace Musharaf.Portal.Core.Blazor.Services.Foundations.Tenants
             return await this.apiBroker.PostTenantAsync(tenant);
         });
 
+        public ValueTask<Tenant> RemoveTenantByIdAsync(Guid Id)
+        {
+            throw new NotImplementedException();
+        }
+
         public ValueTask<List<Tenant>> RetrieveAllTenantAsync() =>
         TryCatch(async () =>
         {

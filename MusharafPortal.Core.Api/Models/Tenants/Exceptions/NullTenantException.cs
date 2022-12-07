@@ -1,6 +1,8 @@
-﻿namespace Musharaf.Portal.Core.Api.Models.Tenants.Exceptions
+﻿using Xeptions;
+
+namespace Musharaf.Portal.Core.Api.Models.Tenants.Exceptions
 {
-    public class NullTenantException : Exception
+    public class NullTenantException : Xeption
     {
         public NullTenantException() : base(message: "The tenant is null.") { }
     }

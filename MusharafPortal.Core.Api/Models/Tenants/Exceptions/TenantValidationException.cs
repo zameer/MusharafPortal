@@ -1,8 +1,10 @@
-﻿namespace Musharaf.Portal.Core.Api.Models.Tenants.Exceptions
+﻿using Xeptions;
+
+namespace Musharaf.Portal.Core.Api.Models.Tenants.Exceptions
 {
-    public class TenantValidationException : Exception
+    public class TenantValidationException : Xeption
     {
-        public TenantValidationException(Exception innerException)
+        public TenantValidationException(Xeption innerException)
             : base(message: "Invalid tenant, please contact musharaf", innerException) { }
     }
 }

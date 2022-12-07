@@ -3,7 +3,9 @@ using Musharaf.Portal.Core.Api.Brokers.Loggings;
 using Musharaf.Portal.Core.Api.Brokers.Storages;
 using Musharaf.Portal.Core.Api.Models.Tenants;
 using Musharaf.Portal.Core.Api.Services.Foundations.Tenants;
+using System.Linq.Expressions;
 using Tynamix.ObjectFiller;
+using Xeptions;
 
 namespace Musharaf.Portal.Core.Api.Tests.Unit.Services.Foundations.Tenants
 {
@@ -38,6 +40,14 @@ namespace Musharaf.Portal.Core.Api.Tests.Unit.Services.Foundations.Tenants
                 .OnType<DateTimeOffset>().Use(dateTime);
 
             return filler;
+        }
+
+        private static Expression<Func<Exception, bool>> SameValidationExceptionAs(Exception expectedException)
+        {
+            return actualException =>
+                actualException.Message == expectedException.Message
+                && actualException.InnerException.Message == expectedException.InnerException.Message
+                && (actualException.InnerException as Xeption).DataEquals(expectedException.InnerException.Data);
         }
     }
 }
