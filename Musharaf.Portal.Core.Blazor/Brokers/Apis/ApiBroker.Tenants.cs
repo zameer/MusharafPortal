@@ -19,5 +19,8 @@ namespace Musharaf.Portal.Core.Blazor.Brokers.Apis
 
         public async ValueTask<Tenant> RemoveTenantByIdAsync(Guid Id) =>
             await this.DeleteAsync<Tenant>($"{RelativeUrl}/{Id}");
+
+        public async ValueTask<Tenant> GetTenantByIdAsync(Guid Id) =>
+            await this.GetAsync<Tenant>($"{RelativeUrl}/{Id}");
     }
 }

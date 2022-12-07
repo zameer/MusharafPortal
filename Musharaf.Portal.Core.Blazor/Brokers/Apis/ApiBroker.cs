@@ -39,6 +39,5 @@ namespace Musharaf.Portal.Core.Blazor.Brokers.Apis
 
             return new RESTFulApiFactoryClient(this.httpClient);
         }
-
     }
 }

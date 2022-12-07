@@ -2,6 +2,7 @@
 using Force.DeepCloner;
 using Moq;
 using Musharaf.Portal.Core.Blazor.Models.Tenants;
+using System.IO.Compression;
 
 namespace Musharaf.Portal.Core.Blazor.Tests.Unit.Services.Foundations.Tenants
 {
@@ -48,6 +49,10 @@ namespace Musharaf.Portal.Core.Blazor.Tests.Unit.Services.Foundations.Tenants
             Guid inputTenantId = randomTenant.Id;
 
             this.apiBrokerMock.Setup(broker =>
+                broker.GetTenantByIdAsync(inputTenantId))
+                .ReturnsAsync(storageTenant);
+
+            this.apiBrokerMock.Setup(broker =>
                 broker.RemoveTenantByIdAsync(inputTenantId))
                 .ReturnsAsync(storageTenant);
 
@@ -58,6 +63,10 @@ namespace Musharaf.Portal.Core.Blazor.Tests.Unit.Services.Foundations.Tenants
 
             // then
             deletedTenant.Should().BeEquivalentTo(expectedTenant);
+
+            this.apiBrokerMock.Verify(broker =>
+                broker.GetTenantByIdAsync(inputTenantId),
+                Times.Once);
 
             this.apiBrokerMock.Verify(broker =>
                 broker.RemoveTenantByIdAsync(inputTenantId),

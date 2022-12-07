@@ -1,4 +1,5 @@
-﻿using Musharaf.Portal.Core.Blazor.Models.Tenants;
+﻿using Microsoft.AspNetCore.Routing.Template;
+using Musharaf.Portal.Core.Blazor.Models.Tenants;
 using Musharaf.Portal.Core.Blazor.Models.Tenants.Exceptions;
 
 namespace Musharaf.Portal.Core.Blazor.Services.Foundations.Tenants
@@ -44,6 +45,24 @@ namespace Musharaf.Portal.Core.Blazor.Services.Foundations.Tenants
             Condition = datetime == default,
             Message = "Date is required"
         };
+
+        private static void ValidateTenantId(Guid tenantId)
+        {
+            if (tenantId == Guid.Empty)
+            {
+                throw new InvalidTenantException(
+                    parameterName: nameof(Tenant.Id),
+                    parameterValue: tenantId);
+            }
+        }
+
+        private static void ValidateStorageTenant(Tenant storageTenant, Guid tenantId)
+        {
+            if (storageTenant is null)
+            {
+                throw new NotFoundTenantException(tenantId);
+            }
+        }
 
         private static void Validate(params (dynamic Rule, string Parameter)[] validations)
         {
