@@ -25,9 +25,9 @@ namespace Musharaf.Portal.Core.Blazor.Services.Foundations.TenantViews
             {
                 throw CreateAndLogValidationException(invalidTenantViewException);
             }
-            catch (TenantValidationException studentValidationException)
+            catch (TenantValidationException tenantValidationException)
             {
-                throw CreateAndLogValidationException(studentValidationException);
+                throw CreateAndLogValidationException(tenantValidationException);
             }
         }
 
@@ -67,9 +67,9 @@ namespace Musharaf.Portal.Core.Blazor.Services.Foundations.TenantViews
             {
                 throw CreateAndLogValidationException(invalidTenantViewException);
             }
-            catch (TenantValidationException studentValidationException)
+            catch (TenantValidationException tenantValidationException)
             {
-                throw CreateAndLogValidationException(studentValidationException);
+                throw CreateAndLogValidationException(tenantValidationException);
             }
         }
         private TenantViewDependencyException CreateAndLogDependencyException(Exception exception)
