@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Musharaf.Portal.Core.Blazor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Musharaf.Portal.Core.Blazor.Tests.Unit", "Musharaf.Portal.Core.Blazor.Tests.Unit\Musharaf.Portal.Core.Blazor.Tests.Unit.csproj", "{1397BBA0-E2BF-4641-AEF0-538C35A8E7C2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Musharaf.Portal.Core.Api.Tests.Acceptance", "Musharaf.Portal.Core.Api.Tests.Acceptance\Musharaf.Portal.Core.Api.Tests.Acceptance.csproj", "{74F7B9F7-F792-4E50-9BF7-4D244B11288A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,10 @@ Global
 		{1397BBA0-E2BF-4641-AEF0-538C35A8E7C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1397BBA0-E2BF-4641-AEF0-538C35A8E7C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1397BBA0-E2BF-4641-AEF0-538C35A8E7C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74F7B9F7-F792-4E50-9BF7-4D244B11288A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74F7B9F7-F792-4E50-9BF7-4D244B11288A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74F7B9F7-F792-4E50-9BF7-4D244B11288A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74F7B9F7-F792-4E50-9BF7-4D244B11288A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -46,6 +52,7 @@ Global
 		{0F7C4C64-4E4B-473A-8827-9D7C8AA2E790} = {CFA3D715-C9D6-41BD-8162-71AEF2524622}
 		{7C02EFA5-C5E1-473E-B342-87CBB2173618} = {9E5BADDB-0F87-4C8E-B6E8-A3085BDAA600}
 		{1397BBA0-E2BF-4641-AEF0-538C35A8E7C2} = {9E5BADDB-0F87-4C8E-B6E8-A3085BDAA600}
+		{74F7B9F7-F792-4E50-9BF7-4D244B11288A} = {CFA3D715-C9D6-41BD-8162-71AEF2524622}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0B93964E-6F9F-47B2-958C-2CFA8305E037}
