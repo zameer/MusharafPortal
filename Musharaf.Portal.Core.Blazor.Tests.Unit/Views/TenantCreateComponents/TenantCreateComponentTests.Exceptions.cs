@@ -26,9 +26,9 @@ namespace Musharaf.Portal.Core.Blazor.Tests.Unit.Views.TenantCreateComponents
 
             // when
             this.renderedTenantCreateComponent =
-                RenderComponent<TenantCreateComponent>();
+                RenderComponent<TenantFormComponent>();
 
-            this.renderedTenantCreateComponent.Instance.SubmitButton.Click();
+            //this.renderedTenantCreateComponent.Instance..Click();
 
             // then
             this.renderedTenantCreateComponent.Instance.ErrorLabel.Value

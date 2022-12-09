@@ -2,10 +2,8 @@
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using Musharaf.Portal.Core.Blazor.Models.ContainerComponents;
-using Musharaf.Portal.Core.Blazor.Models.MudTables;
 using Musharaf.Portal.Core.Blazor.Models.TenantViews;
 using Musharaf.Portal.Core.Blazor.Services.Foundations.TenantViews;
-using System.Data.Common;
 
 namespace Musharaf.Portal.Core.Blazor.Views.Components
 {
@@ -13,8 +11,9 @@ namespace Musharaf.Portal.Core.Blazor.Views.Components
     {
         [Inject]
         public ITenantViewService TenantViewService { get; set; }
-        [Inject] 
-        IDialogService DialogService { get; set; }
+
+        public TenantFormComponent TenantFormComponent { get; set; }
+        public TenantDeleteDialogComponent TenantDeleteDialogComponent { get; set; }
 
         public ComponentState State { get; set; }
 
@@ -48,26 +47,37 @@ namespace Musharaf.Portal.Core.Blazor.Views.Components
             SearchString = text;
             this.Table.ReloadServerData();
         }
-        private void Edit(string id) =>
-            snackBar.Add("Customer Edited.", Severity.Success);
 
-        private void Delete(string id) =>
-            snackBar.Add("Customer Deleted.", Severity.Success);
         private void Refresh()
         {
             this.selectedOptions = this.options.DeepClone();
             this.Table.ReloadServerData();
         }
 
-        private void OpenDialog()
+        private void OpenDeleteDialog(Guid Id) =>
+            this.TenantDeleteDialogComponent.OpenDeleteDialog(Id);
+
+        private void OpenCreateForm() =>
+            this.TenantFormComponent.OpenFormDialog(isEditing: false, "Create Tenant");
+
+        private async Task OpenEditForm(Guid id)
         {
-            var options = new DialogOptions { 
-                MaxWidth = MaxWidth.Medium, 
-                FullWidth = true, 
-                CloseOnEscapeKey = true,
-                CloseButton = true
-            };
-            DialogService.Show<TenantCreateComponent>("Create New Tenant", options);
+            var tenantView = await this.TenantViewService.RetrieveTenantByIdAsync(id);
+            this.TenantFormComponent.OpenFormDialog(isEditing: true, 
+                "Edit Tenant", 
+                tenantView: tenantView);
+        }
+
+        private void TenantCreatedHandler(string message)
+        {
+            snackBar.Add(message, Severity.Success);
+            this.Table.ReloadServerData();
+        }
+
+        private void TenantDeletedHandler(string message)
+        {
+            snackBar.Add(message, Severity.Success);
+            this.Table.ReloadServerData();
         }
     }
 }

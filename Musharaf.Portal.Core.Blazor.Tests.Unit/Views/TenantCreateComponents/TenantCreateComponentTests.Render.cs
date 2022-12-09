@@ -16,15 +16,15 @@ namespace Musharaf.Portal.Core.Blazor.Tests.Unit.Views.TenantCreateComponents
 
             // when
             var initializeTenantCreateComponent =
-                new TenantCreateComponent();
+                new TenantFormComponent();
 
             // then
             initializeTenantCreateComponent.State.Should().Be(expectedComponentState);
-            initializeTenantCreateComponent.Exception.Should().BeNull();
-            initializeTenantCreateComponent.NameTextBox.Should().BeNull();
-            initializeTenantCreateComponent.SubmitButton.Should().BeNull();
-            initializeTenantCreateComponent.DescriptionTextBox.Should().BeNull();
-            initializeTenantCreateComponent.TenantTypeDropDown.Should().BeNull();   
+            //initializeTenantCreateComponent.TenantView.Exception.Should().BeNull();
+            initializeTenantCreateComponent.TenantView.Name.Should().BeNull();
+            //initializeTenantCreateComponent.SubmitButton.Should().BeNull();
+            initializeTenantCreateComponent.TenantView.Description.Should().BeNull();
+            initializeTenantCreateComponent.TenantView.TenantType.Should().BeNull();   
         }
 
         [Fact]
@@ -40,7 +40,7 @@ namespace Musharaf.Portal.Core.Blazor.Tests.Unit.Views.TenantCreateComponents
 
             // when
             this.renderedTenantCreateComponent =
-                RenderComponent<TenantCreateComponent>();
+                RenderComponent<TenantFormComponent>();
 
             // then
             this.renderedTenantCreateComponent.Instance.TenantView

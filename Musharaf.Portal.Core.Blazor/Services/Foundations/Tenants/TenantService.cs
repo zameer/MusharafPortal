@@ -24,6 +24,13 @@ namespace Musharaf.Portal.Core.Blazor.Services.Foundations.Tenants
             return await this.apiBroker.PostTenantAsync(tenant);
         });
 
+        public ValueTask<Tenant> UpdateTenantAsync(Tenant tenant) =>
+        TryCatch(async () =>
+        {
+            ValidateTenantOnCreate(tenant);
+            return await this.apiBroker.PutTenantAsync(tenant);
+        });
+
         public ValueTask<Tenant> RemoveTenantByIdAsync(Guid Id) =>
             TryCatch(async () =>
             {
@@ -51,6 +58,12 @@ namespace Musharaf.Portal.Core.Blazor.Services.Foundations.Tenants
         TryCatch(async () =>
         {
             return await this.apiBroker.GetAllTenantsCountAsync();
+        });
+
+        public ValueTask<Tenant> RetrieveTenantByIdAsync(Guid Id) =>
+        TryCatch(async () =>
+        {
+            return await this.apiBroker.GetTenantByIdAsync(Id);
         });
     }
 }

@@ -11,7 +11,13 @@
             <MudItem xs="12">
                 <MudCard Elevation="25">
                     <MudCardContent style="text-align: right;">
-                        <MudButton @onclick="OpenDialog" Variant="Variant.Filled" Color="Color.Success">New Tenant</MudButton>
+                        <TenantFormComponent @ref=TenantFormComponent
+                                             TenantCreated="TenantCreatedHandler" />
+
+                        <TenantDeleteDialogComponent @ref=TenantDeleteDialogComponent
+                                                     TenantDeleted="TenantDeletedHandler" />
+
+                        <MudButton @onclick="OpenCreateForm" Variant="Variant.Filled" Color="Color.Success">New Tenant</MudButton>
                     </MudCardContent>
                 </MudCard>
                 <br />
@@ -30,11 +36,10 @@
                                     <MudSelectItem T="TableColumn" Value="@column">@column.DisplayName</MudSelectItem>
                                 }
                             </MudSelect>
-                            <MudIconButton 
-                                @onclick="@(()=>Refresh())"
-                                Icon="@Icons.Filled.Refresh" 
-                                Color="Color.Primary" 
-                                ria-label="Load"></MudIconButton>
+                            <MudIconButton @onclick="@(()=>Refresh())"
+                                           Icon="@Icons.Filled.Refresh"
+                                           Color="Color.Primary"
+                                           ria-label="Load"></MudIconButton>
                         </ToolBarContent>
                         <HeaderContent>
                             @foreach (var column in selectedOptions)
@@ -51,8 +56,8 @@
                                 </MudTd>
                             }
                             <MudTd DataLabel="">
-                                <MudFab @onclick="@(()=>Edit(@context.Name))" Color="Color.Primary" Icon="@Icons.Material.Filled.Edit" Size="Size.Small" IconSize="Size.Small" />
-                                <MudFab @onclick="@(()=>Delete(@context.Name))" Color="Color.Secondary" Icon="@Icons.Material.Filled.Delete" Size="Size.Small" IconSize="Size.Small" />
+                                <MudFab @onclick="@(async ()=> await OpenEditForm(@context.Id))" Color="Color.Primary" Icon="@Icons.Material.Filled.Edit" Size="Size.Small" IconSize="Size.Small" />
+                                <MudFab @onclick="@(()=>OpenDeleteDialog(@context.Id))" Color="Color.Secondary" Icon="@Icons.Material.Filled.Delete" Size="Size.Small" IconSize="Size.Small" />
                             </MudTd>
                         </RowTemplate>
                         <NoRecordsContent>

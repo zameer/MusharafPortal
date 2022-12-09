@@ -10,7 +10,7 @@ namespace Musharaf.Portal.Core.Blazor.Tests.Unit.Views.TenantCreateComponents
     public partial class TenantCreateComponentTests : TestContext
     {
         private readonly Mock<ITenantViewService> tenantViewServiceMock;
-        private IRenderedComponent<TenantCreateComponent> renderedTenantCreateComponent;
+        private IRenderedComponent<TenantFormComponent> renderedTenantCreateComponent;
 
         public TenantCreateComponentTests()
         {

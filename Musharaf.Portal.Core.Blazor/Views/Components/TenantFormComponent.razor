@@ -1,0 +1,33 @@
+﻿@using Musharaf.Portal.Core.Blazor.Models.TenantViews;
+@using Musharaf.Portal.Core.Blazor.Views.Components.ContainerComponents
+
+<MudDialog @bind-IsVisible="visible" Options="new() { FullWidth = true }">
+    <TitleContent>
+        <MudText Typo="Typo.h6">
+            @FormTitle
+        </MudText>
+    </TitleContent>
+    <DialogContent>
+        <MudTextField Placeholder="Name"
+                      @bind-Value=@TenantView.Name />
+
+        <MudTextField Placeholder="Description"
+                      @bind-Value=@TenantView.Description />
+        <div class="d-flex">
+            <DropDownBase @ref=@TenantTypeDropDown
+                          TEnum="TenantTypeView" />
+        </div>
+        <LabelBase @ref=ErrorLabel />
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+        @if (isEditing)
+        {
+            <MudButton hidden="isEditing" Color="Color.Primary" OnClick="UpdateTenantAsync">Update Tenant</MudButton>
+        }
+        else
+        {
+            <MudButton hidden="!isEditing" Color="Color.Primary" OnClick="CreateTenantAsync">Create Tenant</MudButton>
+        }
+    </DialogActions>
+</MudDialog>
